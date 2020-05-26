@@ -7,6 +7,7 @@ import location from './location/reducer'
 import history from './history/reducer'
 import error from './error/reducer'
 import deniedGeo from './deniedGeo/reducer'
+import showSearch from './showSearch/reducer'
 
 const bindMiddleware = middleware => {
   if (process.env.NODE_ENV !== 'production') {
@@ -22,6 +23,7 @@ const combinedReducer = combineReducers({
   history,
   error,
   deniedGeo,
+  showSearch,
 })
 
 const reducer = (state, action) => {
