@@ -1,7 +1,8 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { HYDRATE, createWrapper } from 'next-redux-wrapper'
 import thunkMiddleware from 'redux-thunk'
-import count from './count/reducer'
+
+import deniedGeo from './deniedGeo/reducer'
 import tick from './tick/reducer'
 
 const bindMiddleware = (middleware) => {
@@ -13,7 +14,7 @@ const bindMiddleware = (middleware) => {
 }
 
 const combinedReducer = combineReducers({
-  count,
+  deniedGeo,
   tick,
 })
 
