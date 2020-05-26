@@ -1,35 +1,25 @@
-import SearchPage from '../components/Home/SearchPage'
-import HomePage from '../'
-import DailyPage from './Daily/DailyPage'
-import HourlyPage from './Hourly/HourlyPage'
-import NotFoundPage from './NotFoundPage'
-import SearchHistoryPage from './History/SearchHistoryPage'
+import { useRouter } from 'next/router'
 
-const servePage = (state, pageName, location, setLocation, submitHandler) => {
+const servePage = (pageName) => {
+  const router = useRouter()
   switch (pageName) {
     case 'home':
-      return <HomePage state={state} />
-
+      router.push('/')
+      break;
     case 'daily':
-      return <DailyPage state={state} />
-
+      router.push('/daily')
+      break;
     case 'hourly':
-      return <HourlyPage state={state} />
-
+      router.push('/hourly', )
+      break;
     case 'history':
-      return <SearchHistoryPage state={state} />
-
+      router.push('/history')
+      break;
     case 'search':
-      return (
-        <SearchPage
-          location={location}
-          setLocation={setLocation}
-          submitHandler={submitHandler}
-        />
-      )
-
+      router.push('/search')
+      break;
     default:
-      return <NotFoundPage />
+      router.push('/not-found')
   }
 }
 
