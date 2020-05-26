@@ -5,6 +5,7 @@ import thunkMiddleware from 'redux-thunk'
 import weather from './weather/reducer'
 import location from './location/reducer'
 import history from './history/reducer'
+import error from './error/reducer'
 import deniedGeo from './deniedGeo/reducer'
 
 const bindMiddleware = middleware => {
@@ -19,6 +20,7 @@ const combinedReducer = combineReducers({
   weather,
   location,
   history,
+  error,
   deniedGeo,
 })
 
