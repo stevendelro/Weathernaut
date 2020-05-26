@@ -1,10 +1,10 @@
 import { deniedGeoActionTypes } from './action'
 
-const countInitialState = {
+const deniedGeoInitialState = {
   deniedGeolocation: false,
 }
 
-export default function reducer(state = countInitialState, action) {
+export default function reducer(state = deniedGeoInitialState, action) {
   switch (action.type) {
     case deniedGeoActionTypes.DENIED_GEO:
       return {
