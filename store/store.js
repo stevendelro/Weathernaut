@@ -3,9 +3,9 @@ import { HYDRATE, createWrapper } from 'next-redux-wrapper'
 import thunkMiddleware from 'redux-thunk'
 
 import deniedGeo from './deniedGeo/reducer'
-import tick from './tick/reducer'
+import weather from './weather/reducer'
 
-const bindMiddleware = (middleware) => {
+const bindMiddleware = middleware => {
   if (process.env.NODE_ENV !== 'production') {
     const { composeWithDevTools } = require('redux-devtools-extension')
     return composeWithDevTools(applyMiddleware(...middleware))
@@ -15,7 +15,7 @@ const bindMiddleware = (middleware) => {
 
 const combinedReducer = combineReducers({
   deniedGeo,
-  tick,
+  weather,
 })
 
 const reducer = (state, action) => {
