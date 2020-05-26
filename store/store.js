@@ -2,8 +2,9 @@ import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { HYDRATE, createWrapper } from 'next-redux-wrapper'
 import thunkMiddleware from 'redux-thunk'
 
-import deniedGeo from './deniedGeo/reducer'
 import weather from './weather/reducer'
+import location from './location/reducer'
+import deniedGeo from './deniedGeo/reducer'
 
 const bindMiddleware = middleware => {
   if (process.env.NODE_ENV !== 'production') {
@@ -16,6 +17,7 @@ const bindMiddleware = middleware => {
 const combinedReducer = combineReducers({
   deniedGeo,
   weather,
+  location,
 })
 
 const reducer = (state, action) => {
