@@ -1,6 +1,8 @@
 // TODO:
 // 1. handle API call issues
 //    -try with the counter template first to test serverless function shit
+//    -try again, but use https://nextjs.org/docs/basic-features/data-fetching#fetching-data-on-the-client-side
+//    - hide the API keys broooooo
 // 2. Fix all useEffects
 // 3. handle dispatch issues
 // 4. Fix issues listed in drawer
