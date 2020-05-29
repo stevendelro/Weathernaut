@@ -1,3 +1,5 @@
+import moment from 'moment'
+import { v4 as uuidv4 } from 'uuid'
 import { historyActionTypes } from './action'
 
 const historyInitialState = {
@@ -6,6 +8,10 @@ const historyInitialState = {
 }
 
 export default function reducer(state = historyInitialState, action) {
+  const now = moment()
+  const getDate = now.format('L')
+  const getTime = now.format('LTS')
+  
   switch (action.type) {
     case historyActionTypes.LOG_LAST_CITY:
       if (state.historyList.length > 7) {
