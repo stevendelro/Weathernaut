@@ -1,8 +1,4 @@
 // TODO:
-// 1. handle API call issues
-//    -try with the counter template first to test serverless function shit
-//    -try again, but use https://nextjs.org/docs/basic-features/data-fetching#fetching-data-on-the-client-side
-//    - hide the API keys broooooo
 // 2. Fix all useEffects
 // 3. handle dispatch issues
 // 4. Fix issues listed in drawer
@@ -33,71 +29,55 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const Index = ({ weather, showSearch }) => {
-  const [openDrawer, setOpenDrawer] = useState(false)
+const Index = props => {
+  const [initialCoords, setInitialCoords] = useState([])
   const [location, setLocation] = useState('')
-  const [appBarTitle, setAppBarTitle] = useState('React Weather Dashboard')
+  const [openDrawer, setOpenDrawer] = useState(false)
   const [displayedPage, setDisplayedPage] = useState('home')
+  const [appBarTitle, setAppBarTitle] = useState('React Weather Dashboard')
   const classes = useStyles()
 
-    // Retrieve browser geolocation on initial load.
-    useEffect(() => {
-      getPosition()
-        .then(({ coords }) =>
-          getWeather(coords.latitude, coords.longitude, dispatch)
-        )
-        .then(initialWeather => {
-          dispatch({
-            type: 'SET_WEATHER',
-            payload: initialWeather,
-          })
-        })
-        .catch(rejected =>
-          dispatch({
-            type: 'USER_DENIED_GEOLOCATION',
-            payload: rejected,
-          })
-        )
-    }, [])
+  const {
+    weather,
+    setWeather,
+    setLocationByCoords,
+    logLastCity,
+    showSearch,
+    deniedGeo
+  } = props
 
-    // Auto fetch the location name of the browser's Geolocation coordinates.
-    useEffect(() => {
-      getPosition()
-        .then(({ coords }) =>
-          getLocationData(null, coords.latitude, coords.longitude, dispatch)
-        )
-        .then(locationData => {
-          dispatch({
-            type: 'SET_LOCATION',
-            payload: locationData,
-          })
-        })
-        .catch(error => {
-          console.log(
-            "You denied auto-fetching the weather based on your browser's geolocation. Check your browser settings to reset and allow this feature."
-          )
-        })
-    }, [])
+  // Get permission to use browser's geolocation API
+  const getPosition = () => {
+    return new Promise(function (resolve, reject) {
+      navigator.geolocation.getCurrentPosition(resolve, reject)
+    }).catch( error => {
+      deniedGeo(error)
+    })
+  }
 
-    // Add the location of the current weather fetch to search history.
-    useEffect(() => {
-      if (state.location.placeName) {
-        dispatch({
-          type: 'LOG_LAST_CITY',
-          payload: {
-            location: state.location.placeName,
-          },
-        })
-      }
-    }, [state.location.placeName])
+  // Use geolocation coords to get weather and location info on initial load.
+  useEffect(() => {
+    getPosition().then(({ coords }) => {
+      setInitialCoords([coords.latitude, coords.longitude])
+    })
+  }, [])
+  setWeather(initialCoords)
+  setLocationByCoords(initialCoords)
 
-    // Handle rejected permission for geolocation positioning
-    if (state.deniedGeolocation && state.needsSearchPage) {
-      setDisplayedPage('search')
-      dispatch({
-        type: 'SEARCH_PAGE_DISPLAYED',
-      })
+  // Add the location of the current weather fetch to search history.
+  useEffect(() => {
+    if (location.location.placeName) {
+      logLastCity(location.location.placeName)
     }
+  }, [location.location.placeName])
+
+  // Handle rejected permission for geolocation positioning
+  if (state.deniedGeolocation && state.needsSearchPage) {
+    setDisplayedPage('search')
+    dispatch({
+      type: 'SEARCH_PAGE_DISPLAYED',
+    })
+  }
 
   return (
     <>
@@ -135,4 +115,23 @@ const Index = ({ weather, showSearch }) => {
   )
 }
 
-export default connect(state => state)(Index)
+function mapStateToProps({
+  weather,
+  location,
+  history,
+  error,
+  deniedGeo,
+  showSearch,
+}) {
+  return { weather, location, history, error, deniedGeo, showSearch }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setWeather: bindActionCreators(setWeather, dispatch),
+    setLocationByCoords: bindActionCreators(setLocationByCoords, dispatch),
+    logLastCity: bindActionCreators(logLastCity, dispatch),
+    deniedGeo: bindActionCreators(deniedGeo, dispatch),
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Index)
