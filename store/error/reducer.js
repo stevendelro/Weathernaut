@@ -1,12 +1,10 @@
 import { errorActionTypes } from './action'
 
 const errorInitialState = {
-  error: {
-    isTrue: false,
-    mapBoxError: false,
-    darkSkyError: false,
-    message: '',
-  },
+  isTrue: false,
+  mapBoxError: false,
+  darkSkyError: false,
+  message: '',
 }
 
 export default function reducer(state = errorInitialState, action) {

@@ -3,12 +3,10 @@ import { setWeatherActionTypes } from './action'
 
 const weatherInitialState = {
   noWeatherData: true,
-  weather: {
-    loading: false,
-    currently: {},
-    hourly: {},
-    daily: {},
-  },
+  loading: false,
+  currently: {},
+  hourly: {},
+  daily: {},
 }
 
 export default function reducer(state = weatherInitialState, action) {
