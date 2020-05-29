@@ -4,9 +4,9 @@ export const historyActionTypes = {
 
 export const logLastCity = placeName => dispatch => {
   return dispatch({
-    type: 'LOG_LAST_CITY',
+    type: historyActionTypes.LOG_LAST_CITY,
     payload: {
-      location: placeName
+      location: placeName,
     },
   })
 }

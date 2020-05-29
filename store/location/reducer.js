@@ -17,10 +17,6 @@ export default function reducer(state = locationInitialState, action) {
       return {
         ...state,
         noLocationData: false,
-        weather: {
-          ...state.weather,
-          loading: true,
-        },
         location: {
           placeName: action.payload.placeName,
           latitude: action.payload.latitude,
