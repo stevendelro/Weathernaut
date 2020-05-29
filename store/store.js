@@ -6,7 +6,7 @@ import weather from './weather/reducer'
 import location from './location/reducer'
 import history from './history/reducer'
 import error from './error/reducer'
-import deniedGeo from './deniedGeo/reducer'
+import geolocation from './geolocation/reducer'
 import showSearch from './showSearch/reducer'
 
 const bindMiddleware = middleware => {
@@ -22,7 +22,7 @@ const combinedReducer = combineReducers({
   location,
   history,
   error,
-  deniedGeo,
+  geolocation,
   showSearch,
 })
 

@@ -2,7 +2,7 @@ export const showSearchActionTypes = {
   SEARCH_PAGE_DISPLAYED: 'SEARCH_PAGE_DISPLAYED',
 }
 
-export const showSearch = () => dispatch => {
+export const showSearchOnGeoDenial = () => dispatch => {
   return dispatch({
     type: 'SEARCH_PAGE_DISPLAYED',
   })
