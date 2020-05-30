@@ -23,10 +23,6 @@ export const MainListItems = ({
 }) => {
   return (
     <div>
-      <ListItem>
-        <ListItemIcon></ListItemIcon>
-        <ListItemText primary='Menu' />
-      </ListItem>
       <ListItem
         button
         onClick={() => {
@@ -45,7 +41,7 @@ export const MainListItems = ({
         <ListItemIcon>
           <LocationOnIcon />
         </ListItemIcon>
-        <ListItemText primary='Main' />
+        <ListItemText primary='Home' />
       </ListItem>
       <ListItem
         button
@@ -106,17 +102,6 @@ export const MainListItems = ({
           <HistoryIcon />
         </ListItemIcon>
         <ListItemText primary='Search History' />
-      </ListItem>
-      <ListItem
-        button
-        onClick={() =>
-          (window.location.href =
-            'https://github.com/stevendelro/react-weather-dashboard')
-        }>
-        <ListItemIcon>
-          <GitHubIcon />
-        </ListItemIcon>
-        <ListItemText primary='Source Code' />
       </ListItem>
     </div>
   )
@@ -193,5 +178,24 @@ export const SecondaryListItems = ({ onClickHandler, closeDrawer }) => {
         <ListItemText primary='Beijing' />
       </ListItem>
     </div>
+  )
+}
+
+export const TertiaryListItems = () => {
+  return (
+    <>
+      <ListSubheader inset>Source Code</ListSubheader>
+      <ListItem
+        button
+        onClick={() =>
+          (window.location.href =
+            'https://github.com/stevendelro/react-weather-dashboard')
+        }>
+        <ListItemIcon>
+          <GitHubIcon />
+        </ListItemIcon>
+        <ListItemText primary='GitHub' />
+      </ListItem>
+    </>
   )
 }
