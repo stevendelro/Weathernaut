@@ -4,33 +4,33 @@
 // 6. Fix SearchPage. Make sure it receives what it needs to do what it does.
 
 import { useState, useEffect } from 'react'
-import { connect, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { setWeather } from '../store/weather/action'
 import { setLocationByCoords } from '../store/location/action'
 import { deniedGeo } from '../store/geolocation/action'
 import { showSearchOnGeoDenial } from '../store/showSearch/action'
 import { logLastCity } from '../store/history/action'
-// import { makeStyles } from '@material-ui/core/styles'
-// import AppBar from '../components/AppBar'
-// import Drawer from '../components/Drawer'
+import { makeStyles } from '@material-ui/core/styles'
+import AppBar from '../components/AppBar/AppBar'
+import Drawer from '../components/Drawer/Drawer'
 // import LinearProgress from '@material-ui/core/LinearProgress'
-// const useStyles = makeStyles(theme => ({
-//   linearProgressBar: {
-//     width: '100%',
-//     marginTop: '65px',
-//   },
-//   content: {
-//     flexGrow: 1,
-//     height: '100vh',
-//     overflow: 'auto',
-//   },
-//   appBarSpacer: theme.mixins.toolbar,
-//   container: {
-//     paddingTop: theme.spacing(4),
-//     paddingBottom: theme.spacing(4),
-//   },
-// }))
+const useStyles = makeStyles(theme => ({
+  linearProgressBar: {
+    width: '100%',
+    marginTop: '65px',
+  },
+  content: {
+    flexGrow: 1,
+    height: '100vh',
+    overflow: 'auto',
+  },
+  appBarSpacer: theme.mixins.toolbar,
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+  },
+}))
 
 const Index = props => {
   const [initialCoords, setInitialCoords] = useState([])
@@ -38,19 +38,24 @@ const Index = props => {
   const [openDrawer, setOpenDrawer] = useState(false)
   const [displayedPage, setDisplayedPage] = useState('home')
   const [appBarTitle, setAppBarTitle] = useState('React Weather Dashboard')
-  // const classes = useStyles()
+  const classes = useStyles()
 
+  // Action creators
+  const {
+    setWeather,
+    setLocationByCoords,
+    logLastCity,
+    showSearchOnGeoDenial,
+    deniedGeo,
+  } = props
+
+  // State
   const {
     weather,
     history,
     location,
     geolocation,
     showSearch,
-    setWeather,
-    setLocationByCoords,
-    logLastCity,
-    showSearchOnGeoDenial,
-    deniedGeo,
   } = props
 
   // Get permission to use browser's geolocation API
@@ -88,12 +93,11 @@ const Index = props => {
 
   return (
     <>
-      <h1>test</h1>
-      {/* <AppBar
+      <AppBar
         openDrawer={openDrawer}
         setOpenDrawer={setOpenDrawer}
-        location={location}
-        setLocation={setLocation}
+        place={place}
+        setPlace={setPlace}
         appBarTitle={appBarTitle}
       />
       <Drawer
@@ -102,7 +106,7 @@ const Index = props => {
         openDrawer={openDrawer}
         setOpenDrawer={setOpenDrawer}
       />
-      {(weather.noWeatherData && showSearch.needsSearchPage) ||
+      {/*{(weather.noWeatherData && showSearch.needsSearchPage) ||
       weather.weather.loading ? (
         <LinearProgress
           className={classes.linearProgressBar}

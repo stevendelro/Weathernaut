@@ -1,8 +1,11 @@
 // TODO:
 // 1. handle API call issues
 // 2. handle dispatch issues
-
-import { useState } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import clsx from 'clsx'
+import { setLocationByPlaceName } from '../../store/location/action'
+import { setWeather } from '../../store/weather/action'
 import Drawer from '@material-ui/core/Drawer'
 import IconButton from '@material-ui/core/IconButton'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
@@ -12,29 +15,14 @@ import List from '@material-ui/core/List'
 import { MainListItems, SecondaryListItems } from './listItems'
 import useStyles from './useStyles'
 
-function Drawer({ setDisplayedPage, setAppBarTitle, openDrawer, setOpenDrawer }) {
+function MyDrawer(props) {
+  const { setDisplayedPage, setAppBarTitle, openDrawer, setOpenDrawer } = props
   const classes = useStyles()
 
   const onClickHandler = async location => {
-    const { latitude, longitude, placeName } = await getLocationData(
-      location,
-      null,
-      null
-    )
-    dispatch({
-      type: 'SET_LOCATION',
-      payload: {
-        placeName,
-        latitude,
-        longitude,
-        searchedTerm: capitalizeFirstLetter(location),
-      },
-    })
-    const weatherData = await getWeather(latitude, longitude)
-    dispatch({
-      type: 'SET_WEATHER',
-      payload: weatherData,
-    })
+    const { latitude, longitude } = await props.setLocationByPlaceName(location)
+    const coords = [latitude, longitude]
+    setWeather(coords)
     setDisplayedPage('home')
   }
 
@@ -46,7 +34,10 @@ function Drawer({ setDisplayedPage, setAppBarTitle, openDrawer, setOpenDrawer })
     <Drawer
       variant='permanent'
       classes={{
-        paper: clsx(classes.drawerPaper, !openDrawer && classes.drawerPaperClose),
+        paper: clsx(
+          classes.drawerPaper,
+          !openDrawer && classes.drawerPaperClose
+        ),
       }}
       open={openDrawer}>
       <div className={classes.toolbarIcon}>
@@ -60,8 +51,7 @@ function Drawer({ setDisplayedPage, setAppBarTitle, openDrawer, setOpenDrawer })
           setDisplayedPage={setDisplayedPage}
           setAppBarTitle={setAppBarTitle}
           closeDrawer={handleDrawerClose}
-          noWeatherData={state.noWeatherData}
-          dispatch={dispatch}
+          noWeatherData={props.weather.noWeatherData}
         />
       </List>
       <Divider />
@@ -76,4 +66,16 @@ function Drawer({ setDisplayedPage, setAppBarTitle, openDrawer, setOpenDrawer })
   )
 }
 
-export default Drawer
+function mapStateToProps({ weather }) {
+  return { weather }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setLocationByPlaceName: bindActionCreators(
+      setLocationByPlaceName,
+      dispatch
+    ),
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(MyDrawer)

@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import clsx from 'clsx'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import MenuIcon from '@material-ui/icons/Menu'
@@ -8,19 +9,29 @@ import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import useStyles from './useStyles'
 
-function AppBar({
+function MyAppBar({
   openDrawer,
   setOpenDrawer,
-  location,
-  setLocation,
+  place,
+  setPlace,
   weather,
-  deniedGeo,
+  geolocation,
   appBarTitle
 }) {
   const classes = useStyles()
   const handleDrawerOpen = () => {
     setOpenDrawer(true)
   }
+
+  const submitHandler = async e => {
+    e.preventDefault()
+    const { latitude, longitude } = await props.setLocationByPlaceName(location)
+    const coords = [latitude, longitude]
+    setWeather(coords)
+    setLocation('')
+    setDisplayedPage('home')
+  }
+
   return (
     <AppBar
       position='absolute'
@@ -33,7 +44,7 @@ function AppBar({
           onClick={handleDrawerOpen}
           className={clsx(
             classes.menuButton,
-            open && classes.menuButtonHidden
+            openDrawer && classes.menuButtonHidden
           )}>
           <MenuIcon />
         </IconButton>
@@ -47,7 +58,7 @@ function AppBar({
         </Typography>
 
         {/* Search will appear in Welcome page if geolocation position is initially denied. */}
-        {weather.noWeatherData && deniedGeo.deniedGeolocation ? null : (
+        {weather.noWeatherData && geolocation.deniedGeolocation ? null : (
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -60,8 +71,8 @@ function AppBar({
                   input: classes.inputInput,
                 }}
                 inputProps={{ 'aria-label': 'search' }}
-                value={location}
-                onChange={e => setLocation(e.target.value)}
+                value={place}
+                onChange={e => setPlace(e.target.value)}
               />
             </form>
           </div>
@@ -71,4 +82,9 @@ function AppBar({
   )
 }
 
-export default connect(state => state)(AppBar)
+function mapStateToProps({ weather, geolocation }) {
+  return { weather, geolocation }
+}
+
+export default connect(mapStateToProps, null)(MyAppBar)
+
