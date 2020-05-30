@@ -1,87 +1,95 @@
 // TODO:
-// 2. Fix all useEffects
-// 3. handle dispatch issues
 // 4. Fix issues listed in drawer
 // 5. Import all the other main pages.
 // 6. Fix SearchPage. Make sure it receives what it needs to do what it does.
 
 import { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
-import LinearProgress from '@material-ui/core/LinearProgress'
-import { makeStyles } from '@material-ui/core/styles'
-import AppBar from '../components/AppBar'
-import Drawer from '../components/Drawer'
-
-const useStyles = makeStyles(theme => ({
-  linearProgressBar: {
-    width: '100%',
-    marginTop: '65px',
-  },
-  content: {
-    flexGrow: 1,
-    height: '100vh',
-    overflow: 'auto',
-  },
-  appBarSpacer: theme.mixins.toolbar,
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
-}))
+import { connect, useDispatch } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { setWeather } from '../store/weather/action'
+import { setLocationByCoords } from '../store/location/action'
+import { deniedGeo } from '../store/geolocation/action'
+import { showSearchOnGeoDenial } from '../store/showSearch/action'
+import { logLastCity } from '../store/history/action'
+// import { makeStyles } from '@material-ui/core/styles'
+// import AppBar from '../components/AppBar'
+// import Drawer from '../components/Drawer'
+// import LinearProgress from '@material-ui/core/LinearProgress'
+// const useStyles = makeStyles(theme => ({
+//   linearProgressBar: {
+//     width: '100%',
+//     marginTop: '65px',
+//   },
+//   content: {
+//     flexGrow: 1,
+//     height: '100vh',
+//     overflow: 'auto',
+//   },
+//   appBarSpacer: theme.mixins.toolbar,
+//   container: {
+//     paddingTop: theme.spacing(4),
+//     paddingBottom: theme.spacing(4),
+//   },
+// }))
 
 const Index = props => {
   const [initialCoords, setInitialCoords] = useState([])
-  const [location, setLocation] = useState('')
+  const [place, setPlace] = useState('')
   const [openDrawer, setOpenDrawer] = useState(false)
   const [displayedPage, setDisplayedPage] = useState('home')
   const [appBarTitle, setAppBarTitle] = useState('React Weather Dashboard')
-  const classes = useStyles()
+  // const classes = useStyles()
 
   const {
     weather,
+    history,
+    location,
+    geolocation,
+    showSearch,
     setWeather,
     setLocationByCoords,
     logLastCity,
-    showSearch,
-    deniedGeo
+    showSearchOnGeoDenial,
+    deniedGeo,
   } = props
 
   // Get permission to use browser's geolocation API
   const getPosition = () => {
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(resolve, reject)
-    }).catch( error => {
+    }).catch(error => {
       deniedGeo(error)
     })
   }
-
-  // Use geolocation coords to get weather and location info on initial load.
+// Receive coordinates from geolocation. If denied, display simple search page.
   useEffect(() => {
-    getPosition().then(({ coords }) => {
-      setInitialCoords([coords.latitude, coords.longitude])
-    })
+    getPosition()
+      .then(({ coords }) => {
+        setInitialCoords([coords.latitude, coords.longitude])
+      })
+      .catch(() => {
+        setDisplayedPage('search')
+        showSearchOnGeoDenial()
+      })
   }, [])
-  setWeather(initialCoords)
-  setLocationByCoords(initialCoords)
 
-  // Add the location of the current weather fetch to search history.
-  useEffect(() => {
-    if (location.location.placeName) {
-      logLastCity(location.location.placeName)
-    }
-  }, [location.location.placeName])
-
-  // Handle rejected permission for geolocation positioning
-  if (state.deniedGeolocation && state.needsSearchPage) {
-    setDisplayedPage('search')
-    dispatch({
-      type: 'SEARCH_PAGE_DISPLAYED',
-    })
+  if (initialCoords) {
+    setWeather(initialCoords)
+    setLocationByCoords(initialCoords)
   }
+
+
+  useEffect(() => {
+    if (location.placeName) {
+      logLastCity(location.placeName)
+    }
+  }, [location.placeName])
+
 
   return (
     <>
-      <AppBar
+      <h1>test</h1>
+      {/* <AppBar
         openDrawer={openDrawer}
         setOpenDrawer={setOpenDrawer}
         location={location}
@@ -110,7 +118,7 @@ const Index = props => {
             </Box>
           </Container>
         </main>
-      )}
+      )} */}
     </>
   )
 }
@@ -120,10 +128,10 @@ function mapStateToProps({
   location,
   history,
   error,
-  deniedGeo,
+  geolocation,
   showSearch,
 }) {
-  return { weather, location, history, error, deniedGeo, showSearch }
+  return { weather, location, history, error, geolocation, showSearch }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -132,6 +140,7 @@ const mapDispatchToProps = dispatch => {
     setLocationByCoords: bindActionCreators(setLocationByCoords, dispatch),
     logLastCity: bindActionCreators(logLastCity, dispatch),
     deniedGeo: bindActionCreators(deniedGeo, dispatch),
+    showSearchOnGeoDenial: bindActionCreators(showSearchOnGeoDenial, dispatch),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Index)
