@@ -12,8 +12,7 @@ import { deniedGeo } from '../store/geolocation/action'
 import { showSearchOnGeoDenial } from '../store/showSearch/action'
 import { logLastCity } from '../store/history/action'
 import { makeStyles } from '@material-ui/core/styles'
-import AppBar from '../components/AppBar/AppBar'
-import Drawer from '../components/Drawer/Drawer'
+
 // import LinearProgress from '@material-ui/core/LinearProgress'
 const useStyles = makeStyles(theme => ({
   linearProgressBar: {
@@ -34,10 +33,6 @@ const useStyles = makeStyles(theme => ({
 
 const Index = props => {
   const [initialCoords, setInitialCoords] = useState([])
-  const [place, setPlace] = useState('')
-  const [openDrawer, setOpenDrawer] = useState(false)
-  const [displayedPage, setDisplayedPage] = useState('home')
-  const [appBarTitle, setAppBarTitle] = useState('React Weather Dashboard')
   const classes = useStyles()
 
   // Action creators
@@ -93,19 +88,6 @@ const Index = props => {
 
   return (
     <>
-      <AppBar
-        openDrawer={openDrawer}
-        setOpenDrawer={setOpenDrawer}
-        place={place}
-        setPlace={setPlace}
-        appBarTitle={appBarTitle}
-      />
-      <Drawer
-        setDisplayedPage={setDisplayedPage}
-        setAppBarTitle={setAppBarTitle}
-        openDrawer={openDrawer}
-        setOpenDrawer={setOpenDrawer}
-      />
       {/*{(weather.noWeatherData && showSearch.needsSearchPage) ||
       weather.weather.loading ? (
         <LinearProgress
