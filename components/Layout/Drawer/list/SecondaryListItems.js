@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { setLocationByPlaceName } from '../../../../store/location/action'
+import { getLocationByPlaceName } from '../../../../store/location/action'
 
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -28,55 +28,37 @@ function SecondaryListItems(props) {
   return (
     <div>
       <ListSubheader inset>Quick Links</ListSubheader>
-      <ListItem
-        button
-        onClick={handleClick}
-        value='los angeles'>
+      <ListItem button onClick={handleClick} value='los angeles'>
         <ListItemIcon>
           <MovieFilterIcon />
         </ListItemIcon>
         <ListItemText primary='Los Angeles' />
       </ListItem>
-      <ListItem
-        button
-        onClick={handleClick}
-        value='new york'>
+      <ListItem button onClick={handleClick} value='new york'>
         <ListItemIcon>
           <LocationCityIcon />
         </ListItemIcon>
         <ListItemText primary='New York' />
       </ListItem>
-      <ListItem
-        button
-        onClick={handleClick}
-        value='tokyo'>
+      <ListItem button onClick={handleClick} value='tokyo'>
         <ListItemIcon>
           <AirportShuttleIcon />
         </ListItemIcon>
         <ListItemText primary='Tokyo' />
       </ListItem>
-      <ListItem
-        button
-        onClick={handleClick}
-        value='london'>
+      <ListItem button onClick={handleClick} value='london'>
         <ListItemIcon>
           <EuroIcon />
         </ListItemIcon>
         <ListItemText primary='London' />
       </ListItem>
-      <ListItem
-        button
-        onClick={handleClick}
-        value='moscow'>
+      <ListItem button onClick={handleClick} value='moscow'>
         <ListItemIcon>
           <AcUnitIcon />
         </ListItemIcon>
         <ListItemText primary='Moscow' />
       </ListItem>
-      <ListItem
-        button
-        onClick={handleClick}
-        value='beijing'>
+      <ListItem button onClick={handleClick} value='beijing'>
         <ListItemIcon>
           <TranslateIcon />
         </ListItemIcon>
@@ -88,8 +70,8 @@ function SecondaryListItems(props) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setLocationByPlaceName: bindActionCreators(
-      setLocationByPlaceName,
+    getLocationByPlaceName: bindActionCreators(
+      getLocationByPlaceName,
       dispatch
     ),
   }
@@ -97,8 +79,8 @@ const mapDispatchToProps = dispatch => {
 export default connect(null, mapDispatchToProps)(SecondaryListItems)
 
 // const quickLinksHandler = async location => {
-//   // const poop = await props.setLocationByPlaceName(location)
-//   console.log('poop', await props.setLocationByPlaceName(location))
+//   // const poop = await props.getLocationByPlaceName(location)
+//   console.log('poop', await props.getLocationByPlaceName(location))
 //   // const coords = [latitude, longitude]
 //   // props.setWeather(coords)
 //   // props.setDisplayedPage('home')

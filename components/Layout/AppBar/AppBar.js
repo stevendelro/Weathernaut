@@ -8,6 +8,7 @@ import InputBase from '@material-ui/core/InputBase'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import useStyles from './useStyles'
+// import { getWeatherByCoords } from '../../../store/weather/action'
 
 function MyAppBar({
   openDrawer,
@@ -16,7 +17,7 @@ function MyAppBar({
   setPlace,
   weather,
   geolocation,
-  appBarTitle
+  appBarTitle,
 }) {
   const classes = useStyles()
   const handleDrawerOpen = () => {
@@ -25,11 +26,11 @@ function MyAppBar({
 
   const submitHandler = async e => {
     e.preventDefault()
-    const { latitude, longitude } = await props.setLocationByPlaceName(location)
-    const coords = [latitude, longitude]
-    setWeather(coords)
-    setLocation('')
-    setDisplayedPage('home')
+    // const { latitude, longitude } = await props.getLocationByPlaceName(location)
+    // const coords = [latitude, longitude]
+    // setWeather(coords)
+    // setLocation('')
+    // setDisplayedPage('home')
   }
 
   return (
@@ -87,4 +88,3 @@ function mapStateToProps({ weather, geolocation }) {
 }
 
 export default connect(mapStateToProps, null)(MyAppBar)
-

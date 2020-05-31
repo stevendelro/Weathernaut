@@ -6,8 +6,8 @@
 import { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { setWeather } from '../store/weather/action'
-import { setLocationByCoords } from '../store/location/action'
+import { getWeatherByCoords } from '../store/weather/action'
+import { getLocationByCoords } from '../store/location/action'
 import { deniedGeo } from '../store/geolocation/action'
 import { showSearchOnGeoDenial } from '../store/showSearch/action'
 import { logLastCity } from '../store/history/action'
@@ -32,26 +32,20 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Index = props => {
-  const [initialCoords, setInitialCoords] = useState([])
   const classes = useStyles()
 
   // Action creators
   const {
-    setWeather,
-    setLocationByCoords,
+    getWeatherByCoords,
+    getLocationByCoords,
+    setDisplayedPage,
     logLastCity,
     showSearchOnGeoDenial,
     deniedGeo,
   } = props
 
   // State
-  const {
-    weather,
-    history,
-    location,
-    geolocation,
-    showSearch,
-  } = props
+  const { location } = props
 
   // Get permission to use browser's geolocation API
   const getPosition = () => {
@@ -61,11 +55,12 @@ const Index = props => {
       deniedGeo(error)
     })
   }
-// Receive coordinates from geolocation. If denied, display simple search page.
+  // Receive coordinates from geolocation. If denied, display simple search page.
   useEffect(() => {
     getPosition()
       .then(({ coords }) => {
-        setInitialCoords([coords.latitude, coords.longitude])
+        getWeatherByCoords([coords.latitude, coords.longitude])
+        getLocationByCoords([coords.latitude, coords.longitude])
       })
       .catch(() => {
         setDisplayedPage('search')
@@ -73,18 +68,11 @@ const Index = props => {
       })
   }, [])
 
-  if (initialCoords) {
-    setWeather(initialCoords)
-    setLocationByCoords(initialCoords)
-  }
-
-
   useEffect(() => {
     if (location.placeName) {
       logLastCity(location.placeName)
     }
   }, [location.placeName])
-
 
   return (
     <>
@@ -109,21 +97,14 @@ const Index = props => {
   )
 }
 
-function mapStateToProps({
-  weather,
-  location,
-  history,
-  error,
-  geolocation,
-  showSearch,
-}) {
-  return { weather, location, history, error, geolocation, showSearch }
+function mapStateToProps({ location }) {
+  return { location }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    setWeather: bindActionCreators(setWeather, dispatch),
-    setLocationByCoords: bindActionCreators(setLocationByCoords, dispatch),
+    getWeatherByCoords: bindActionCreators(getWeatherByCoords, dispatch),
+    getLocationByCoords: bindActionCreators(getLocationByCoords, dispatch),
     logLastCity: bindActionCreators(logLastCity, dispatch),
     deniedGeo: bindActionCreators(deniedGeo, dispatch),
     showSearchOnGeoDenial: bindActionCreators(showSearchOnGeoDenial, dispatch),

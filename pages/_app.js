@@ -48,7 +48,7 @@ function MyApp(props) {
             openDrawer={openDrawer}
             setOpenDrawer={setOpenDrawer}
           />
-          <Component {...pageProps} />
+          <Component {...pageProps} setDisplayedPage={setDisplayedPage}  />
         </div>
       </ThemeProvider>
     </>

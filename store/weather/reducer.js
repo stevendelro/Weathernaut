@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { setWeatherActionTypes } from './action'
+import { weatherActionTypes } from './action'
 
 const weatherInitialState = {
   noWeatherData: true,
@@ -11,7 +11,7 @@ const weatherInitialState = {
 
 export default function reducer(state = weatherInitialState, action) {
   switch (action.type) {
-    case setWeatherActionTypes.SET_WEATHER:
+    case weatherActionTypes.GET_WEATHER:
       // Format Timestamp to human legible weekday and day of month
       action.payload.daily.data.forEach(day => {
         day.weekday = moment.unix(day.time).format('ddd')
