@@ -6,22 +6,17 @@ import IconButton from '@material-ui/core/IconButton'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import Divider from '@material-ui/core/Divider'
 import List from '@material-ui/core/List'
-import { setLocationByPlaceName } from '../../../store/location/action'
 import { setWeather } from '../../../store/weather/action'
 
-import { MainListItems, SecondaryListItems, TertiaryListItems } from './listItems'
+import MainListItems from './list/MainListItems'
+import SecondaryListItems from './list/SecondaryListItems'
+import TertiaryListItems from './list/TertiaryListItems'
+
 import useStyles from './useStyles'
 
 function MyDrawer(props) {
   const { setDisplayedPage, setAppBarTitle, openDrawer, setOpenDrawer } = props
   const classes = useStyles()
-
-  const onClickHandler = async location => {
-    const { latitude, longitude } = await props.setLocationByPlaceName(location)
-    const coords = [latitude, longitude]
-    setWeather(coords)
-    setDisplayedPage('home')
-  }
 
   const handleDrawerClose = () => {
     setOpenDrawer(false)
@@ -30,7 +25,7 @@ function MyDrawer(props) {
   return (
     <Drawer
       variant='permanent'
-      style={{height: '100vh'}}
+      style={{ height: '100vh' }}
       classes={{
         paper: clsx(
           classes.drawerPaper,
@@ -49,13 +44,11 @@ function MyDrawer(props) {
           setDisplayedPage={setDisplayedPage}
           setAppBarTitle={setAppBarTitle}
           closeDrawer={handleDrawerClose}
-          noWeatherData={props.weather.noWeatherData}
         />
       </List>
       <Divider />
       <List>
         <SecondaryListItems
-          onClickHandler={onClickHandler}
           setAppBarTitle={setAppBarTitle}
           closeDrawer={handleDrawerClose}
         />
@@ -74,10 +67,7 @@ function mapStateToProps({ weather }) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setLocationByPlaceName: bindActionCreators(
-      setLocationByPlaceName,
-      dispatch
-    ),
+    setWeather: bindActionCreators(setWeather, dispatch),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MyDrawer)
