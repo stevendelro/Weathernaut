@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer'
 import Title from '../Title'
 import getCardinalDirection from '../../util/getCardinalDirection'
 
-export default function RightNowTable({ weather }) {
+function RightNowTable({ weather }) {
   const { currently } = weather
   return (
     <>

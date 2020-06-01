@@ -7,7 +7,7 @@ import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import serveIcon from '../../public/icons/index'
 
-export default function UpcomingWeek({ weather }) {
+function UpcomingWeek({ weather }) {
   const [chartData, setChartData] = useState([])
 
   useEffect(() => {

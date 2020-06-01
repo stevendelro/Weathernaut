@@ -11,7 +11,7 @@ import {
 } from 'recharts'
 import Title from '../Title'
 
-export default function Next24Chart({ weather }) {
+function Next24Chart({ weather }) {
   const [hourlyTemps, setHourlyTemps] = useState([])
 
   useEffect(() => {

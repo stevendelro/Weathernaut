@@ -67,8 +67,8 @@ function MyApp(props) {
             openDrawer={openDrawer}
             setOpenDrawer={setOpenDrawer}
           />
-          <main maxWidth='lg' className={classes.content}>
-            <Container className={classes.container}>
+          <main className={classes.content}>
+            <Container maxWidth='lg' className={classes.container}>
               <Component {...pageProps} setDisplayedPage={setDisplayedPage} />
               <Box pt={4}>
                 <CopyLeft />

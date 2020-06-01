@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   },
 })
 
-export default function CurrentTemp({ weather }) {
+function CurrentTemp({ weather }) {
   const classes = useStyles()
   return (
     <Grid container direction='column' justify='center' alignItems='center'>
