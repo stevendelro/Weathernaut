@@ -1,20 +1,10 @@
 import axios from 'axios'
-import { getLocationByPlaceName } from '../location/action'
 import { capitalizeFirstLetter } from '../../util/capitalizeFirstLetter'
+import { setLocationActionTypes } from '../location/action'
+
 export const weatherActionTypes = {
   GET_WEATHER: 'GET_WEATHER',
 }
-
-// export const setWeather = coords => dispatch => {
-//   useSWR(`/api/darksky/${coords[0]}/${coords[1]}`, fetcher, {
-//     onSuccess: ({ data }) => {
-//       dispatch({
-//         type: weatherActionTypes.GET_WEATHER,
-//         payload: data,
-//       })
-//     },
-//   })
-// }
 
 export const getWeatherByCoords = coords => dispatch => {
   axios
@@ -29,20 +19,23 @@ export const getWeatherByCoords = coords => dispatch => {
 }
 
 export const getWeather = placeName => dispatch => {
+  
+  // hit mapbox to get coords
   axios
     .get(`/api/mapbox/${placeName}`)
-    .then(res => {
+    .then(({ data }) => {
       dispatch({
         type: setLocationActionTypes.SET_LOCATION,
         payload: {
-          placeName: res.placeName,
-          latitude: res.latitude,
-          longitude: res.longitude,
+          placeName: data.placeName,
+          latitude: data.latitude,
+          longitude: data.longitude,
           searchedTerm: capitalizeFirstLetter(placeName),
         },
       })
+      // hit darksky with coords to get weather
       axios
-        .get(`/api/darksky/${coords[0]}/${coords[1]}`)
+        .get(`/api/darksky/${data.latitude}/${data.longitude}`)
         .then(({ data }) => {
           dispatch({
             type: weatherActionTypes.GET_WEATHER,

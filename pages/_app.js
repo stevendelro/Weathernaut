@@ -38,6 +38,7 @@ function MyApp(props) {
           <AppBar
             openDrawer={openDrawer}
             setOpenDrawer={setOpenDrawer}
+            setDisplayedPage={setDisplayedPage} 
             place={place}
             setPlace={setPlace}
             appBarTitle={appBarTitle}

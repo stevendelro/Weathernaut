@@ -30,18 +30,16 @@ export default function reducer(state = weatherInitialState, action) {
       return {
         ...state,
         noWeatherData: false,
-        weather: {
-          ...state.weather,
-          loading: false,
-          currently: {
-            ...action.payload.currently,
-            today: moment
-              .unix(action.payload.currently.time)
-              .format('dddd, MMMM Do'),
-          },
-          hourly: { ...action.payload.hourly },
-          daily: { ...action.payload.daily },
+        ...state.weather,
+        loading: false,
+        currently: {
+          ...action.payload.currently,
+          today: moment
+            .unix(action.payload.currently.time)
+            .format('dddd, MMMM Do'),
         },
+        hourly: { ...action.payload.hourly },
+        daily: { ...action.payload.daily },
       }
 
     default:
