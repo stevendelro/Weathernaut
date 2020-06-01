@@ -1,11 +1,28 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
-import { ThemeProvider } from '@material-ui/core/styles'
+import { ThemeProvider, makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import Container from '@material-ui/core/Container'
+import Box from '@material-ui/core/Box'
 import AppBar from '../components/Layout/AppBar/AppBar'
 import Drawer from '../components/Layout/Drawer/Drawer'
+import CopyLeft from '../components/CopyLeft'
 import theme from '../styles/theme/theme'
 import { wrapper } from '../store/store'
+
+const useStyles = makeStyles(theme => ({
+  content: {
+    width: '100%',
+    marginTop: '65px',
+    flexGrow: 1,
+    height: '100vh',
+    overflow: 'auto',
+  },
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+  },
+}))
 
 function MyApp(props) {
   const [place, setPlace] = useState('')
@@ -14,6 +31,7 @@ function MyApp(props) {
   const [appBarTitle, setAppBarTitle] = useState('React Weather Dashboard')
 
   const { Component, pageProps } = props
+  const classes = useStyles()
   useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side')
@@ -38,7 +56,7 @@ function MyApp(props) {
           <AppBar
             openDrawer={openDrawer}
             setOpenDrawer={setOpenDrawer}
-            setDisplayedPage={setDisplayedPage} 
+            setDisplayedPage={setDisplayedPage}
             place={place}
             setPlace={setPlace}
             appBarTitle={appBarTitle}
@@ -49,7 +67,14 @@ function MyApp(props) {
             openDrawer={openDrawer}
             setOpenDrawer={setOpenDrawer}
           />
-          <Component {...pageProps} setDisplayedPage={setDisplayedPage}  />
+          <main maxWidth='lg' className={classes.content}>
+            <Container className={classes.container}>
+              <Component {...pageProps} setDisplayedPage={setDisplayedPage} />
+              <Box pt={4}>
+                <CopyLeft />
+              </Box>
+            </Container>
+          </main>
         </div>
       </ThemeProvider>
     </>

@@ -12,23 +12,26 @@ import { deniedGeo } from '../store/geolocation/action'
 import { showSearchOnGeoDenial } from '../store/showSearch/action'
 import { logLastCity } from '../store/history/action'
 import { makeStyles } from '@material-ui/core/styles'
+import LinearProgress from '@material-ui/core/LinearProgress'
+import Container from '@material-ui/core/Container'
+import Box from '@material-ui/core/Box'
+import CopyLeft from '../components/CopyLeft'
+import servePage from '../util/servePage'
 
-// import LinearProgress from '@material-ui/core/LinearProgress'
+import daily from '../pages/daily'
+
 const useStyles = makeStyles(theme => ({
-  linearProgressBar: {
+  content: {
     width: '100%',
     marginTop: '65px',
-  },
-  content: {
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
-  },
-  appBarSpacer: theme.mixins.toolbar,
+  }
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
-  },
+  }
 }))
 
 const Index = props => {
@@ -45,7 +48,7 @@ const Index = props => {
   } = props
 
   // State
-  const { location } = props
+  const { location, weather, showSearch } = props
 
   // Get permission to use browser's geolocation API
   const getPosition = () => {
@@ -75,30 +78,21 @@ const Index = props => {
   }, [location.placeName])
 
   return (
-    <>
-      {/*{(weather.noWeatherData && showSearch.needsSearchPage) ||
-      weather.weather.loading ? (
-        <LinearProgress
-          className={classes.linearProgressBar}
-          color='secondary'
-        />
+    <div className={classes.content}>
+      {(weather.noWeatherData && showSearch.needsSearchPage) ||
+      weather.loading ? (
+        <LinearProgress color='secondary' />
       ) : (
-        <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
-          <Container maxWidth='l' className={classes.container}>
-            {servePage(displayedPage, location, setLocation)}
-            <Box pt={4}>
-              <Copyleft />
-            </Box>
-          </Container>
-        </main>
-      )} */}
-    </>
+        <Container maxWidth='lg' className={classes.container}>
+          {servePage('daily')}
+        </Container>
+      )}
+    </div>
   )
 }
 
-function mapStateToProps({ location }) {
-  return { location }
+function mapStateToProps({ location, weather, showSearch }) {
+  return { location, weather, showSearch }
 }
 
 const mapDispatchToProps = dispatch => {
