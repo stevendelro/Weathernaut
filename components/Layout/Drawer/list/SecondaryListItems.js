@@ -1,7 +1,6 @@
-import { useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getLocationByPlaceName } from '../../../../store/location/action'
+import { getWeather } from '../../../../store/weather/action'
 
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -15,14 +14,11 @@ import TranslateIcon from '@material-ui/icons/Translate'
 import AcUnitIcon from '@material-ui/icons/AcUnit'
 
 function SecondaryListItems(props) {
-  const [shouldFetch, setShouldFetch] = useState(false)
-  const [placeName, setPlaceName] = useState('')
   const { closeDrawer } = props
 
   function handleClick(event) {
     closeDrawer()
-    setPlaceName(event.currentTarget.attributes.value.value)
-    setShouldFetch(true)
+    props.getWeather(event.currentTarget.attributes.value.value)
   }
 
   return (
@@ -70,18 +66,7 @@ function SecondaryListItems(props) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getLocationByPlaceName: bindActionCreators(
-      getLocationByPlaceName,
-      dispatch
-    ),
+    getWeather: bindActionCreators(getWeather, dispatch),
   }
 }
 export default connect(null, mapDispatchToProps)(SecondaryListItems)
-
-// const quickLinksHandler = async location => {
-//   // const poop = await props.getLocationByPlaceName(location)
-//   console.log('poop', await props.getLocationByPlaceName(location))
-//   // const coords = [latitude, longitude]
-//   // props.setWeather(coords)
-//   // props.setDisplayedPage('home')
-// }
