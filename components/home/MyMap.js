@@ -15,7 +15,7 @@ function MyMap(props) {
   const { location, weather, getMapBoxKey } = props
 
   useEffect(() => {
-    axios.get(`/api/map/index.js`).then(res => setKey(res.data.key))
+    const res = axios.get(`/api/map/${key}`).then(res => setKey(res.data.key))
   }, [])
 
   if (!location.latitude || !location.longitude || !key) {

@@ -1,24 +1,31 @@
 // TODO:
-// 4. Fix issues listed in drawer
 // 5. Import all the other main pages.
 // 6. Fix SearchPage. Make sure it receives what it needs to do what it does.
 
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import Router from 'next/router'
+import clsx from 'clsx'
 import { getWeatherByCoords } from '../store/weather/action'
 import { getLocationByCoords } from '../store/location/action'
 import { deniedGeo } from '../store/geolocation/action'
 import { showSearchOnGeoDenial } from '../store/showSearch/action'
 import { logLastCity } from '../store/history/action'
+import Paper from '@material-ui/core/Paper'
+import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Container from '@material-ui/core/Container'
 import Box from '@material-ui/core/Box'
 import CopyLeft from '../components/CopyLeft'
-import servePage from '../util/servePage'
+import getShortName from '../util/getShortName'
 
-import daily from '../pages/daily'
+import MyMap from '../components/home/MyMap'
+import CurrentTemp from '../components/home/CurrentTemp'
+import UpcomingWeek from '../components/home/UpcomingWeek'
+import RightNowTable from '../components/home/RightNowTable'
+import Next24Chart from '../components/home/Next24Chart'
 
 const useStyles = makeStyles(theme => ({
   content: {
@@ -27,15 +34,25 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
-  }
+  },
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
-  }
+  },
+  paper: {
+    padding: theme.spacing(2),
+    display: 'flex',
+    overflow: 'auto',
+    flexDirection: 'column',
+  },
+  fixedHeight: {
+    height: 330,
+  },
 }))
 
 const Index = props => {
   const classes = useStyles()
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
 
   // Action creators
   const {
@@ -78,13 +95,41 @@ const Index = props => {
   }, [location.placeName])
 
   return (
-    <div className={classes.content}>
+    <div>
       {(weather.noWeatherData && showSearch.needsSearchPage) ||
       weather.loading ? (
         <LinearProgress color='secondary' />
       ) : (
         <Container maxWidth='lg' className={classes.container}>
-          {servePage('daily')}
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <MyMap key={props.key} />
+            </Grid>
+
+            <Grid item xs={12} md={4}>
+              <Paper className={fixedHeightPaper}>
+                <CurrentTemp />
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12} md={8}>
+              <Paper className={fixedHeightPaper}>
+                <UpcomingWeek />
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12} md={4} lg={3}>
+              <Paper className={fixedHeightPaper}>
+                <RightNowTable />
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12} md={8} lg={9}>
+              <Paper className={fixedHeightPaper}>
+                <Next24Chart />
+              </Paper>
+            </Grid>
+          </Grid>
         </Container>
       )}
     </div>
