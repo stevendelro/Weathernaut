@@ -41,34 +41,31 @@ const MainListItems = props => {
   return (
     <>
       {/* Home */}
-      <Link href='/'>
-        <ListItem
-          button
-          component='a'
-          onClick={() => {
-            if (noWeatherData) {
-              closeDrawerAndShowSearch()
-            } else {
-              closeDrawer()
-              setAppBarTitle('React Weather Dashboard')
-            }
-          }}>
-          <ListItemIcon>
-            <LocationOnIcon />
-          </ListItemIcon>
-          <ListItemText primary='Home' />
-        </ListItem>
-      </Link>
+      <ListItem
+        button
+        component='a'
+        onClick={event => {
+          if (noWeatherData) {
+            closeDrawerAndShowSearch()
+          } else {
+            closeDrawerAndShowPage('home', placeName)(event)
+          }
+        }}>
+        <ListItemIcon>
+          <LocationOnIcon />
+        </ListItemIcon>
+        <ListItemText primary='Home' />
+      </ListItem>
 
       {/* Hourly */}
       <ListItem
         button
         component='a'
-        onClick={e => {
+        onClick={event => {
           if (noWeatherData) {
             closeDrawerAndShowSearch()
           } else {
-            closeDrawerAndShowPage('hourly', placeName)(e)
+            closeDrawerAndShowPage('hourly', placeName)(event)
           }
         }}>
         <ListItemIcon>
@@ -81,11 +78,11 @@ const MainListItems = props => {
       <ListItem
         button
         component='a'
-        onClick={e => {
+        onClick={event => {
           if (noWeatherData) {
             closeDrawerAndShowSearch()
           } else {
-            closeDrawerAndShowPage('daily', placeName)(e)
+            closeDrawerAndShowPage('daily', placeName)(event)
           }
         }}>
         <ListItemIcon>
