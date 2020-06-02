@@ -1,8 +1,7 @@
-import { makeStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import Container from '@material-ui/core/Container'
-import Grid from '@material-ui/core/Grid'
-
+import { makeStyles } from '@material-ui/core/styles'
 import DailyTable from '../../components/daily/DailyTable'
 import DailyTemps from '../../components/daily/DailyTemps'
 import DailyHumidity from '../../components/daily/DailyHumidity'

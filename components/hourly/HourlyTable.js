@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import getCardinalDirection from '../../util/getCardinalDirection'
 import { v4 as uuidv4 } from 'uuid'
+import Grid from '@material-ui/core/Grid'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
-import Grid from '@material-ui/core/Grid'
+import TableContainer from '@material-ui/core/TableContainer'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import TableContainer from '@material-ui/core/TableContainer'
 import Title from '../Title'
+import getCardinalDirection from '../../util/getCardinalDirection'
 
 function HourlyTable({ weather, location }) {
   const [chartData, setChartData] = useState([])

@@ -1,6 +1,3 @@
-// TODO
-// 1. make drawerWidth available above AppBar and Drawer
-
 import { fade, makeStyles } from '@material-ui/core/styles'
 
 const drawerWidth = 195

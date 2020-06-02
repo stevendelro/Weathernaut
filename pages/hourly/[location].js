@@ -1,15 +1,14 @@
-import { connect } from 'react-redux'
-import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container'
-import HourTemp from '../../components/hourly/HourTemp'
-import HourHumidity from '../../components/hourly/HourHumidity'
+import { makeStyles } from '@material-ui/core/styles'
 import HourUV from '../../components/hourly/HourUV'
-import HourBarometer from '../../components/hourly/HourBarometer'
-import HourCloud from '../../components/hourly/HourCloud'
 import HourRain from '../../components/hourly/HourRain'
+import HourTemp from '../../components/hourly/HourTemp'
+import HourCloud from '../../components/hourly/HourCloud'
 import HourlyTable from '../../components/hourly/HourlyTable'
+import HourHumidity from '../../components/hourly/HourHumidity'
+import HourBarometer from '../../components/hourly/HourBarometer'
 
 const useStyles = makeStyles(theme => ({
   paper: {

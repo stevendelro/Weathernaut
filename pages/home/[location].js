@@ -1,11 +1,8 @@
-
-import Router from 'next/router'
 import clsx from 'clsx'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
-import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
-
+import { makeStyles } from '@material-ui/core/styles'
 import MyMap from '../../components/home/MyMap'
 import CurrentTemp from '../../components/home/CurrentTemp'
 import UpcomingWeek from '../../components/home/UpcomingWeek'

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { capitalizeFirstLetter } from '../../util/capitalizeFirstLetter'
+import capitalizeFirstLetter from '../../util/capitalizeFirstLetter'
 import { setLocationActionTypes } from '../location/action'
 
 export const weatherActionTypes = {
@@ -19,7 +19,6 @@ export const getWeatherByCoords = coords => dispatch => {
 }
 
 export const getWeather = placeName => dispatch => {
-  
   // hit mapbox to get coords
   axios
     .get(`/api/mapbox/${placeName}`)

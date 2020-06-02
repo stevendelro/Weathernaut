@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Router from 'next/router'
-import Link from 'next/link'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -9,21 +8,19 @@ import LocationOnIcon from '@material-ui/icons/LocationOn'
 import HistoryIcon from '@material-ui/icons/History'
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder'
 import DateRangeIcon from '@material-ui/icons/DateRange'
-
 import getShortName from '../../../../util/getShortName'
-import { capitalizeFirstLetter } from '../../../../util/capitalizeFirstLetter'
-import { showSearchOnGeoDenial } from '../../../../store/showSearch/action'
+import capitalizeFirstLetter from '../../../../util/capitalizeFirstLetter'
+import showSearchOnGeoDenial from '../../../../store/showSearch/action'
 
 const MainListItems = props => {
   // From parent
-  const { setDisplayedPage, setAppBarTitle, closeDrawer } = props
+  const { setAppBarTitle, closeDrawer } = props
 
   // From connect
   const { noWeatherData, placeName } = props
 
   const closeDrawerAndShowSearch = event => {
     event.preventDefault()
-    console.log('clicked')
     closeDrawer()
     Router.push('/search')
     props.showSearchOnGeoDenial()
@@ -31,10 +28,10 @@ const MainListItems = props => {
 
   const closeDrawerAndShowPage = (page, place) => event => {
     event.preventDefault()
-    console.log('page', page)
-    console.log('place', place)
     closeDrawer()
-    Router.push(`/${page}/[location]`, `/${page}/${getShortName(place)}`)
+    place
+      ? Router.push(`/${page}/[location]`, `/${page}/${getShortName(place)}`)
+      : Router.push(`/${page}`)
     setAppBarTitle(capitalizeFirstLetter(page))
   }
 
@@ -92,24 +89,22 @@ const MainListItems = props => {
       </ListItem>
 
       {/* History */}
-      <Link href='/history'>
-        <ListItem
-          button
-          component='a'
-          onClick={() => {
-            if (noWeatherData) {
-              closeDrawerAndShowSearch()
-            } else {
-              closeDrawer()
-              setAppBarTitle('History')
-            }
-          }}>
-          <ListItemIcon>
-            <HistoryIcon />
-          </ListItemIcon>
-          <ListItemText primary='Search History' />
-        </ListItem>
-      </Link>
+      <ListItem
+        button
+        component='a'
+        onClick={() => {
+          if (noWeatherData) {
+            closeDrawerAndShowSearch()
+          } else {
+            closeDrawer()
+            closeDrawerAndShowPage('history', null)(event)
+          }
+        }}>
+        <ListItemIcon>
+          <HistoryIcon />
+        </ListItemIcon>
+        <ListItemText primary='Search History' />
+      </ListItem>
     </>
   )
 }

@@ -7,7 +7,6 @@ import OutlinedInput from '@material-ui/core/OutlinedInput'
 import FormControl from '@material-ui/core/FormControl'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Container from '@material-ui/core/Container'
-
 import { getWeatherByCoords } from '../store/weather/action'
 import { getLocationByPlaceName } from '../store/location/action'
 import getShortName from '../util/getShortName'

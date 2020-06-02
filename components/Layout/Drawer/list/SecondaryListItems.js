@@ -1,17 +1,16 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getWeather } from '../../../../store/weather/action'
-
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListSubheader from '@material-ui/core/ListSubheader'
+import EuroIcon from '@material-ui/icons/Euro'
+import AcUnitIcon from '@material-ui/icons/AcUnit'
+import TranslateIcon from '@material-ui/icons/Translate'
 import MovieFilterIcon from '@material-ui/icons/MovieFilter'
 import LocationCityIcon from '@material-ui/icons/LocationCity'
 import AirportShuttleIcon from '@material-ui/icons/AirportShuttle'
-import EuroIcon from '@material-ui/icons/Euro'
-import TranslateIcon from '@material-ui/icons/Translate'
-import AcUnitIcon from '@material-ui/icons/AcUnit'
+import { getWeather } from '../../../../store/weather/action'
 
 function SecondaryListItems(props) {
   const { closeDrawer } = props

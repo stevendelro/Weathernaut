@@ -1,14 +1,14 @@
 import React from 'react'
-import ClearDay from './icons/ClearDay'
-import ClearNight from './icons/ClearNight'
-import Cloudy from './icons/Cloudy'
 import Fog from './icons/Fog'
-import PartlyCloudyDay from './icons/PartlyCloudyDay'
-import PartlyCloudyNight from './icons/PartlyCloudyNight'
 import Rain from './icons/Rain'
-import Sleet from './icons/Sleet'
 import Snow from './icons/Snow'
 import Wind from './icons/Wind'
+import Sleet from './icons/Sleet'
+import Cloudy from './icons/Cloudy'
+import ClearDay from './icons/ClearDay'
+import ClearNight from './icons/ClearNight'
+import PartlyCloudyDay from './icons/PartlyCloudyDay'
+import PartlyCloudyNight from './icons/PartlyCloudyNight'
 
 const serveIcon = iconName => {
   switch (iconName) {

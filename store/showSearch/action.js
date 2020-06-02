@@ -7,3 +7,5 @@ export const showSearchOnGeoDenial = () => dispatch => {
     type: 'SEARCH_PAGE_DISPLAYED',
   })
 }
+
+export default showSearchOnGeoDenial

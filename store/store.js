@@ -1,13 +1,12 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { HYDRATE, createWrapper } from 'next-redux-wrapper'
 import thunkMiddleware from 'redux-thunk'
-
-import weather from './weather/reducer'
-import location from './location/reducer'
-import history from './history/reducer'
 import error from './error/reducer'
-import geolocation from './geolocation/reducer'
+import weather from './weather/reducer'
+import history from './history/reducer'
+import location from './location/reducer'
 import showSearch from './showSearch/reducer'
+import geolocation from './geolocation/reducer'
 
 const bindMiddleware = middleware => {
   if (process.env.NODE_ENV !== 'production') {
