@@ -23,7 +23,6 @@ const useStyles = makeStyles(theme => ({
 function MyApp(props) {
   const [place, setPlace] = useState('')
   const [openDrawer, setOpenDrawer] = useState(false)
-  const [displayedPage, setDisplayedPage] = useState('home')
   const [appBarTitle, setAppBarTitle] = useState('React Weather Dashboard')
 
   const { Component, pageProps } = props
@@ -52,20 +51,18 @@ function MyApp(props) {
           <AppBar
             openDrawer={openDrawer}
             setOpenDrawer={setOpenDrawer}
-            setDisplayedPage={setDisplayedPage}
             place={place}
             setPlace={setPlace}
             appBarTitle={appBarTitle}
           />
           <Drawer
-            setDisplayedPage={setDisplayedPage}
             setAppBarTitle={setAppBarTitle}
             openDrawer={openDrawer}
             setOpenDrawer={setOpenDrawer}
           />
           <main className={classes.content}>
             <Container maxWidth='lg'>
-              <Component {...pageProps} setDisplayedPage={setDisplayedPage} />
+              <Component {...pageProps} />
               <Box pt={4}>
                 <CopyLeft />
               </Box>

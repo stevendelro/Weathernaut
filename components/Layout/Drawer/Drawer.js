@@ -12,7 +12,6 @@ import TertiaryListItems from './list/TertiaryListItems'
 import useStyles from './useStyles'
 
 function MyDrawer({
-  setDisplayedPage,
   setAppBarTitle,
   openDrawer,
   setOpenDrawer,
@@ -42,7 +41,6 @@ function MyDrawer({
       <Divider />
       <List>
         <MainListItems
-          setDisplayedPage={setDisplayedPage}
           setAppBarTitle={setAppBarTitle}
           closeDrawer={handleDrawerClose}
         />

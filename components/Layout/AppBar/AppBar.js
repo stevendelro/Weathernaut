@@ -18,7 +18,6 @@ function MyAppBar(props) {
   const {
     openDrawer,
     setOpenDrawer,
-    setDisplayedPage,
     place,
     setPlace,
     appBarTitle,
@@ -38,7 +37,6 @@ function MyAppBar(props) {
     e.preventDefault()
     await props.getWeather(place)
     setPlace('')
-    setDisplayedPage('home')
   }
 
   return (
