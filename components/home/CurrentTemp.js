@@ -18,9 +18,7 @@ function CurrentTemp({ weather }) {
       <Typography align='center' component='h2' variant='h6' color='primary'>
         {weather.currently.today}
       </Typography>
-      <Box className={classes.iconBox}>
-        {serveIcon(weather.currently.icon)}
-      </Box>
+      <Box className={classes.iconBox}>{serveIcon(weather.currently.icon)}</Box>
       <Typography align='center' component='p' variant='h2'>
         {Number(weather.currently.temperature).toFixed(0)}°F
       </Typography>
@@ -31,7 +29,5 @@ function CurrentTemp({ weather }) {
   )
 }
 
-function mapStateToProps({ weather }) {
-  return { weather }
-}
+const mapStateToProps = ({ weather }) => ({ weather })
 export default connect(mapStateToProps, null)(CurrentTemp)

@@ -7,8 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer'
 import Title from '../Title'
 import getCardinalDirection from '../../util/getCardinalDirection'
 
-function RightNowTable({ weather }) {
-  const { currently } = weather
+function RightNowTable({ currently }) {
   return (
     <>
       <Title>Today</Title>
@@ -72,7 +71,8 @@ function RightNowTable({ weather }) {
   )
 }
 
-function mapStateToProps({ weather }) {
-  return { weather }
+const mapStateToProps = ({ weather }) => {
+  const { currently } = weather
+  return { currently }
 }
 export default connect(mapStateToProps, null)(RightNowTable)

@@ -61,7 +61,5 @@ function Next24Chart({ weather }) {
   )
 }
 
-function mapStateToProps({ weather }) {
-  return { weather }
-}
+const mapStateToProps = ({ weather }) => ({ weather })
 export default connect(mapStateToProps, null)(Next24Chart)

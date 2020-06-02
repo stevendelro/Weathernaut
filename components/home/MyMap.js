@@ -10,9 +10,8 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Title from '../Title'
 
-function MyMap(props) {
+function MyMap({ location, weather }) {
   const [key, setKey] = useState(undefined)
-  const { location, weather, getMapBoxKey } = props
 
   useEffect(() => {
     const res = axios.get(`/api/map/${key}`).then(res => setKey(res.data.key))
@@ -75,8 +74,5 @@ function MyMap(props) {
   )
 }
 
-function mapStateToProps({ location, weather }) {
-  return { location, weather }
-}
-
+const mapStateToProps = ({ location, weather }) => ({ location, weather })
 export default connect(mapStateToProps, null)(MyMap)

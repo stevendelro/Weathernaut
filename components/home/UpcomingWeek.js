@@ -25,7 +25,7 @@ function UpcomingWeek({ weather }) {
     })
   }, [weather.daily.data])
 
-  if (chartData.length === 8) {
+  while (chartData.length >= 8) {
     chartData.shift()
   }
   return (
@@ -66,8 +66,6 @@ function UpcomingWeek({ weather }) {
   )
 }
 
-function mapStateToProps({ weather }) {
-  return { weather }
-}
+const mapStateToProps = ({ weather }) => ({ weather })
 export default connect(mapStateToProps, null)(UpcomingWeek)
 

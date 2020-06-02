@@ -13,15 +13,11 @@ import { wrapper } from '../store/store'
 const useStyles = makeStyles(theme => ({
   content: {
     width: '100%',
-    marginTop: '65px',
+    marginTop: '57px',
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
-  },
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
+  }
 }))
 
 function MyApp(props) {
@@ -68,7 +64,7 @@ function MyApp(props) {
             setOpenDrawer={setOpenDrawer}
           />
           <main className={classes.content}>
-            <Container maxWidth='lg' className={classes.container}>
+            <Container maxWidth='lg'>
               <Component {...pageProps} setDisplayedPage={setDisplayedPage} />
               <Box pt={4}>
                 <CopyLeft />

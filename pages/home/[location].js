@@ -26,7 +26,7 @@ function Home({ noWeatherData, noLocationData }) {
   const classes = useStyles()
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
 
-  if (noWeatherData || noLocationData) return null
+
 
   return (
     <Grid container spacing={3}>
