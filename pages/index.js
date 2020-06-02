@@ -1,11 +1,3 @@
-// TODO:
-// 1. Fix history page. Make it rerender live when new search results arrive.
-// 2. Get notFound page looking good and fully functional
-// 3. Get searchPage fully functional -> this means you need to fool proof geolocation denial.
-// 4. Figure out how to implement the Material-UI Skeleton API and getStaticProps
-// 5. Sift through all import statements and passed props to clean up unused stuff.
-// 6. Optimize everything with getStaticProps, getServerSideProps, and useSWR
-
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'

@@ -11,6 +11,10 @@ import {
 } from 'recharts'
 import Title from '../Title'
 
+// AREA CHART COLORS
+const gradientFillHigh = '#FFE499'
+const lineStrokeHigh= '#FFBC00'
+
 function Next24Chart({ weather }) {
   const [hourlyTemps, setHourlyTemps] = useState([])
 
@@ -36,8 +40,8 @@ function Next24Chart({ weather }) {
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id='temps' x1='0' y1='0' x2='0' y2='1'>
-              <stop offset='5%' stopColor='#FFE499' stopOpacity={0.8} />
-              <stop offset='95%' stopColor='#FFE499' stopOpacity={0} />
+              <stop offset='5%' stopColor={gradientFillHigh} stopOpacity={0.8} />
+              <stop offset='95%' stopColor={gradientFillHigh} stopOpacity={0} />
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray='3 3' />
@@ -51,7 +55,7 @@ function Next24Chart({ weather }) {
           <Area
             type='monotone'
             dataKey='temp'
-            stroke='#FFBC00'
+            stroke={lineStrokeHigh}
             fillOpacity={1}
             fill='url(#temps)'
           />

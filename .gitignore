@@ -22,3 +22,4 @@ yarn-error.log*
 
 # Next.js
 /.next
+.todo.md

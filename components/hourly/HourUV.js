@@ -10,6 +10,9 @@ import {
 } from 'recharts'
 import Title from '../Title'
 
+// BAR CHART COLORS
+const barFillColor = '#F3E723'
+
 function HourUV({ weather }) {
   const [chartData, setChartData] = useState([])
 
@@ -41,7 +44,7 @@ function HourUV({ weather }) {
           <XAxis dataKey='time' />
           <YAxis tickSize={1} unit='/10' domain={[0, 10]} />
           <CartesianGrid strokeDasharray='3 3' />
-          <Bar dataKey='uv' name='High' fill='#F3E723' barSize={20} />
+          <Bar dataKey='uv' name='High' fill={barFillColor} barSize={20} />
         </BarChart>
       </ResponsiveContainer>
     </>

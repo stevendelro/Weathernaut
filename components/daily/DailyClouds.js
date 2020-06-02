@@ -11,6 +11,10 @@ import {
 } from 'recharts'
 import Title from '../Title'
 
+// AREA CHART COLORS
+const gradientFill = '#999999'
+const lineStroke= '#191919'
+
 function DailyClouds({ weather }) {
   const [chartData, setChartData] = useState([])
 
@@ -41,8 +45,8 @@ function DailyClouds({ weather }) {
           }}>
           <defs>
             <linearGradient id='dailyCloudGradient' x1='0' y1='0' x2='0' y2='1'>
-              <stop offset='1%' stopColor='#999999' stopOpacity={0.8} />
-              <stop offset='99%' stopColor='#999999' stopOpacity={0} />
+              <stop offset='1%' stopColor={gradientFill} stopOpacity={0.8} />
+              <stop offset='99%' stopColor={gradientFill} stopOpacity={0} />
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray='3 3' />
@@ -52,7 +56,7 @@ function DailyClouds({ weather }) {
           <Area
             type='monotone'
             dataKey='cloudCover'
-            stroke='#191919'
+            stroke={lineStroke}
             fill='url(#dailyCloudGradient)'
           />
         </AreaChart>

@@ -11,6 +11,10 @@ import {
 } from 'recharts'
 import Title from '../Title'
 
+// AREA CHART COLORS
+const gradientFillHigh = '#FFE499'
+const lineStrokeHigh= '#FFBC00'
+
 function HourTemp({ weather }) {
   const [chartData, setChartData] = useState([])
 
@@ -41,8 +45,8 @@ function HourTemp({ weather }) {
           }}>
           <defs>
             <linearGradient id='tempGradient' x1='0' y1='0' x2='0' y2='1'>
-              <stop offset='1%' stopColor='#FFE499' stopOpacity={0.8} />
-              <stop offset='99%' stopColor='#FFE499' stopOpacity={0} />
+              <stop offset='1%' stopColor={gradientFillHigh} stopOpacity={0.8} />
+              <stop offset='99%' stopColor={gradientFillHigh} stopOpacity={0} />
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray='3 3' />
@@ -52,7 +56,7 @@ function HourTemp({ weather }) {
           <Area
             type='monotone'
             dataKey='temp'
-            stroke='#FFBC00'
+            stroke={lineStrokeHigh}
             fill='url(#tempGradient)'
           />
         </AreaChart>

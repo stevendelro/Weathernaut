@@ -11,6 +11,10 @@ import {
 } from 'recharts'
 import Title from '../Title'
 
+// AREA CHART COLORS
+const gradientFill = '#83DA70'
+const lineStroke = '#3DB125'
+
 function HourBarometer({ weather }) {
   const [chartData, setChartData] = useState([])
 
@@ -41,8 +45,8 @@ function HourBarometer({ weather }) {
           }}>
           <defs>
             <linearGradient id='barometerGradient' x1='0' y1='0' x2='0' y2='1'>
-              <stop offset='1%' stopColor='#83DA70' stopOpacity={0.8} />
-              <stop offset='99%' stopColor='#83DA70' stopOpacity={0} />
+              <stop offset='1%' stopColor={gradientFill} stopOpacity={0.8} />
+              <stop offset='99%' stopColor={gradientFill} stopOpacity={0} />
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray='3 3' />
@@ -52,7 +56,7 @@ function HourBarometer({ weather }) {
           <Area
             type='monotone'
             dataKey='pressure'
-            stroke='#3DB125'
+            stroke={lineStroke}
             fill='url(#barometerGradient)'
           />
         </AreaChart>

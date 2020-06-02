@@ -8,6 +8,16 @@ import Title from '../Title'
 import getCardinalDirection from '../../util/getCardinalDirection'
 
 function RightNowTable({ currently }) {
+  
+  const percentProbability = `${currently.precipProbability.toFixed(0)}%`
+  const humidity = `${(currently.humidity * 100).toFixed(0)}%`
+  const pressure = `${(currently.pressure * 0.0295301).toFixed(2)} in`
+  const cardinalDirection = getCardinalDirection(currently.windBearing)
+  const windSpeed = `${currently.windSpeed.toFixed(1)} mph`
+  const cloudCover = `${(currently.cloudCover * 100).toFixed(0)}% of sky`
+  const visibility =
+  `${currently.visibility} mi` + `${currently.visibility === 10 ? '+' : ''}`
+
   return (
     <>
       <Title>Today</Title>
@@ -16,46 +26,43 @@ function RightNowTable({ currently }) {
           <TableBody>
             <TableRow hover={true}>
               <TableCell size='small'>Rain</TableCell>
-              <TableCell
-                align='right'
-                size='small'>{`${currently.precipProbability.toFixed(
-                0
-              )}%`}</TableCell>
+              <TableCell align='right' size='small'>
+                {percentProbability}
+              </TableCell>
             </TableRow>
 
             <TableRow hover={true}>
               <TableCell size='small'>Humidity</TableCell>
-              <TableCell align='right' size='small'>{`${(
-                currently.humidity * 100
-              ).toFixed(0)}%`}</TableCell>
+              <TableCell align='right' size='small'>
+                {humidity}
+              </TableCell>
             </TableRow>
 
             <TableRow hover={true}>
               <TableCell size='small'>Visibility</TableCell>
-              <TableCell align='right' size='small'>{`${
-                currently.visibility
-              } mi${currently.visibility === 10 ? '+' : ''}`}</TableCell>
+              <TableCell align='right' size='small'>
+                {visibility}
+              </TableCell>
             </TableRow>
 
             <TableRow hover={true}>
               <TableCell size='small'>Pressure</TableCell>
-              <TableCell align='right' size='small'>{`${(
-                currently.pressure * 0.0295301
-              ).toFixed(2)} in`}</TableCell>
+              <TableCell align='right' size='small'>
+                {pressure}
+              </TableCell>
             </TableRow>
 
             <TableRow hover={true}>
               <TableCell size='small'>Wind</TableCell>
               <TableCell align='right' size='small'>
-                {getCardinalDirection(currently.windBearing)}
-                {currently.windSpeed.toFixed(1)} mph{' '}
+                `${cardinalDirection} ${windSpeed}`
               </TableCell>
             </TableRow>
 
             <TableRow hover={true}>
               <TableCell size='small'>Cloud Coverage</TableCell>
               <TableCell align='right' size='small'>
-                {(currently.cloudCover * 100).toFixed(0)}% of sky
+                {cloudCover}
               </TableCell>
             </TableRow>
             <TableRow hover={true}>

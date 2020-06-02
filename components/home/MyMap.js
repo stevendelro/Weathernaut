@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import axios from 'axios'
 import ReactMapGL, { Marker } from 'react-map-gl'
 import Grid from '@material-ui/core/Grid'
@@ -14,7 +13,7 @@ function MyMap({ location, weather }) {
   const [key, setKey] = useState(undefined)
 
   useEffect(() => {
-    const res = axios.get(`/api/map/${key}`).then(res => setKey(res.data.key))
+    axios.get(`/api/map/${key}`).then(res => setKey(res.data.key))
   }, [])
 
   if (!location.latitude || !location.longitude || !key) {
@@ -33,8 +32,8 @@ function MyMap({ location, weather }) {
             {weather.daily.summary}
           </Grid>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          Map is currently unavailable.
+        <ExpansionPanelDetails style={{justifyContent: 'center'}}>
+            <em>~ Map is currently unavailable ~</em>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     )

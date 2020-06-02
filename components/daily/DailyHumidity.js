@@ -11,6 +11,10 @@ import {
 } from 'recharts'
 import Title from '../Title'
 
+// AREA CHART COLORS
+const gradientFill = '#766CC8'
+const lineStroke= '#392CA9'
+
 function DailyHumidity({ weather }) {
   const [chartData, setChartData] = useState([])
 
@@ -46,8 +50,8 @@ function DailyHumidity({ weather }) {
               y1='0'
               x2='0'
               y2='1'>
-              <stop offset='1%' stopColor='#766CC8' stopOpacity={0.8} />
-              <stop offset='99%' stopColor='#766CC8' stopOpacity={0} />
+              <stop offset='1%' stopColor={gradientFill} stopOpacity={0.8} />
+              <stop offset='99%' stopColor={gradientFill} stopOpacity={0} />
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray='3 3' />
@@ -57,7 +61,7 @@ function DailyHumidity({ weather }) {
           <Area
             type='monotone'
             dataKey='humidity'
-            stroke='#392CA9'
+            stroke={lineStroke}
             fill='url(#dailyHumidityGradient)'
           />
         </AreaChart>

@@ -10,6 +10,9 @@ import {
 } from 'recharts'
 import Title from '../Title'
 
+// BAR CHART COLORS
+const barFillColor = '#6886c5'
+
 function HourRain({ weather }) {
   const [chartData, setChartData] = useState([])
 
@@ -43,7 +46,7 @@ function HourRain({ weather }) {
           <Bar
             dataKey='rain'
             name='High'
-            fill='#6886c5'
+            fill={barFillColor}
             unit='%'
             barSize={20}
           />
