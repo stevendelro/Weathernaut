@@ -58,8 +58,8 @@ export const getLocationByCoords = coords => dispatch => {
     .catch(error => console.log('getLocationByCoords ERROR', error.message))
 }
 
-export const getLocationByPlaceName = placeName => dispatch => {
-  axios
+export const getLocationByPlaceName = placeName => async dispatch => {
+  await axios
     .get(`/api/mapbox/${placeName}`)
     .then(res => {
       dispatch({
@@ -70,6 +70,12 @@ export const getLocationByPlaceName = placeName => dispatch => {
           longitude: res.longitude,
           searchedTerm: capitalizeFirstLetter(placeName),
         },
+      })
+      resolve({
+        placeName: res.placeName,
+        latitude: res.latitude,
+        longitude: res.longitude,
+        searchedTerm: capitalizeFirstLetter(placeName),
       })
     })
     .catch(error => console.log('getLocationByPlaceName ERROR', error.message))
