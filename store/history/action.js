@@ -2,7 +2,7 @@ export const historyActionTypes = {
   LOG_LAST_CITY: 'LOG_LAST_CITY',
 }
 
-const logLastCity = placeName => dispatch => {
+export const logLastCity = placeName => dispatch => {
   return dispatch({
     type: historyActionTypes.LOG_LAST_CITY,
     payload: {
@@ -10,5 +10,3 @@ const logLastCity = placeName => dispatch => {
     },
   })
 }
-
-export default logLastCity
