@@ -2,6 +2,7 @@ import { setLocationActionTypes } from './action'
 
 const locationInitialState = {
   noLocationData: true,
+  deniedGeolocation: undefined,
   placeName: '',
   latitude: '',
   longitude: '',
@@ -19,6 +20,11 @@ export default function reducer(state = locationInitialState, action) {
         latitude: action.payload.latitude,
         longitude: action.payload.longitude,
         searchedTerm: action.payload.searchedTerm,
+      }
+    case setLocationActionTypes.DENIED_GEO:
+      return {
+        ...state,
+        deniedGeolocation: true,
       }
     default:
       return state

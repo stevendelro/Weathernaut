@@ -5,6 +5,13 @@ import capitalizeFirstLetter from '../../util/capitalizeFirstLetter'
 
 export const setLocationActionTypes = {
   SET_LOCATION: 'SET_LOCATION',
+  GEO_DENIED: 'GEO_DENIED'
+}
+
+export const denyGeo = () => dispatch => {
+  return dispatch({
+    type: setLocationActionTypes.GEO_DENIED,
+  })
 }
 
 export const getLocationByCoords = coords => dispatch => {
