@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import Router from 'next/router'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -10,7 +9,6 @@ import QueryBuilderIcon from '@material-ui/icons/QueryBuilder'
 import DateRangeIcon from '@material-ui/icons/DateRange'
 import getShortName from '../../../../util/getShortName'
 import capitalizeFirstLetter from '../../../../util/capitalizeFirstLetter'
-import showSearchOnGeoDenial from '../../../../store/showSearch/action'
 
 const MainListItems = props => {
   // From parent
@@ -23,7 +21,6 @@ const MainListItems = props => {
     event.preventDefault()
     closeDrawer()
     Router.push('/search')
-    props.showSearchOnGeoDenial()
   }
 
   const closeDrawerAndShowPage = (page, place) => event => {
@@ -115,9 +112,4 @@ function mapStateToProps({ weather, location }) {
   return { noWeatherData, placeName }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    showSearchOnGeoDenial: bindActionCreators(showSearchOnGeoDenial, dispatch),
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(MainListItems)
+export default connect(mapStateToProps, null)(MainListItems)

@@ -5,8 +5,6 @@ import error from './error/reducer'
 import weather from './weather/reducer'
 import history from './history/reducer'
 import location from './location/reducer'
-import showSearch from './showSearch/reducer'
-import geolocation from './geolocation/reducer'
 
 const bindMiddleware = middleware => {
   if (process.env.NODE_ENV !== 'production') {
@@ -21,8 +19,6 @@ const combinedReducer = combineReducers({
   location,
   history,
   error,
-  geolocation,
-  showSearch,
 })
 
 const reducer = (state, action) => {
@@ -31,7 +27,11 @@ const reducer = (state, action) => {
       ...state, // use previous state
       ...action.payload, // apply delta from hydration
     }
-    if (state.count) nextState.count = state.count // preserve count value on client side navigation
+    // preserve state on client side navigation
+    if (state.weather) nextState.weather = state.weather
+    if (state.location) nextState.location = state.location
+    if (state.history) nextState.history = state.history
+    if (state.error) nextState.error = state.error
     return nextState
   } else {
     return combinedReducer(state, action)

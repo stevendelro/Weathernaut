@@ -89,8 +89,8 @@ function MyAppBar(props) {
   )
 }
 
-function mapStateToProps({ weather, geolocation }) {
-  return { weather, geolocation }
+function mapStateToProps({ weather }) {
+  return { weather }
 }
 
 const mapDispatchToProps = dispatch => {
