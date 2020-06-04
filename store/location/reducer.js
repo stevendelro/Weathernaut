@@ -36,7 +36,7 @@ export default function reducer(state = locationInitialState, action) {
         ...state,
         locationLoading: true,
       }
-    case locationActions.DENIED_GEO:
+    case locationActions.GEO_DENIED:
       return {
         ...state,
         deniedGeolocation: true,

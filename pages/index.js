@@ -7,7 +7,6 @@ import Container from '@material-ui/core/Container'
 import { logLastCity } from '../store/history/action'
 import { getWeatherByCoords } from '../store/weather/action'
 import { getLocationByCoords, denyGeo } from '../store/location/action'
-import deniedGeoMessage from '../util/deniedGeoMessage'
 import Search from '../components/home/Search'
 const useStyles = makeStyles(theme => ({
   container: {
@@ -47,20 +46,18 @@ const Index = props => {
         navigator.geolocation.getCurrentPosition(resolve, reject)
       })
     } catch (error) {
-      denyGeo()
-      deniedGeoMessage()
+      console.log(error)
     }
   }
   // Receive coordinates from geolocation. If denied, display simple search page.
   useEffect(() => {
-
     getPosition()
       .then(({ coords }) => {
         getWeatherByCoords([coords.latitude, coords.longitude])
         getLocationByCoords([coords.latitude, coords.longitude])
       })
       .catch(() => {
-        // Router.push('/search')
+        denyGeo()
         setRenderedComponent(<Search />)
       })
   }, [])
