@@ -9,7 +9,6 @@ import OutlinedInput from '@material-ui/core/OutlinedInput'
 import FormControl from '@material-ui/core/FormControl'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Container from '@material-ui/core/Container'
-import LinearProgress from '@material-ui/core/LinearProgress'
 
 import {
   startLocationFetchByPlaceName,
@@ -29,7 +28,6 @@ const useStyles = makeStyles(theme => ({
 
 function SearchPage(props) {
   const [userInput, setUserInput] = useState('')
-  const [showSpinnerOnFetch, setShowSpinnerOnFetch] = useState(false)
   const classes = useStyles()
   const {
     // Action Creators
@@ -46,7 +44,6 @@ function SearchPage(props) {
 
   const submitHandler = async event => {
     event.preventDefault()
-    setShowSpinnerOnFetch(true)
     startLocationFetchByPlaceName()
     await getLocationByPlaceName(userInput)
   }
@@ -66,36 +63,32 @@ function SearchPage(props) {
 
   return (
     <Container maxWidth='lg' className={classes.container}>
-      {showSpinnerOnFetch ? (
-        <LinearProgress />
-      ) : (
-        <Grid
-          container
-          direction='row'
-          justify='center'
-          alignItems='center'
-          spacing={3}>
-          <Grid item xs={12} md={8} lg={6}>
-            <form onSubmit={submitHandler}>
-              <FormControl
-                fullWidth
-                className={classes.margin}
-                variant='outlined'>
-                <OutlinedInput
-                  id='outlined-adornment-amount'
-                  value={userInput}
-                  onChange={e => setUserInput(e.target.value)}
-                  startAdornment={
-                    <InputAdornment position='start'>
-                      <SearchIcon color='disabled' />
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>
-            </form>
-          </Grid>
+      <Grid
+        container
+        direction='row'
+        justify='center'
+        alignItems='center'
+        spacing={3}>
+        <Grid item xs={12} md={8} lg={6}>
+          <form onSubmit={submitHandler}>
+            <FormControl
+              fullWidth
+              className={classes.margin}
+              variant='outlined'>
+              <OutlinedInput
+                id='outlined-adornment-amount'
+                value={userInput}
+                onChange={e => setUserInput(e.target.value)}
+                startAdornment={
+                  <InputAdornment position='start'>
+                    <SearchIcon color='disabled' />
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+          </form>
         </Grid>
-      )}
+      </Grid>
     </Container>
   )
 }

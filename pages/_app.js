@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
-import Box from '@material-ui/core/Box'
+import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider, makeStyles } from '@material-ui/core/styles'
@@ -17,6 +17,9 @@ const useStyles = makeStyles(() => ({
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
+  },
+  circleProgress: {
+    marginTop: '33vh'
   }
 }))
 
@@ -60,9 +63,15 @@ function MyApp(props) {
           <main className={classes.content}>
             <Container maxWidth='lg'>
               <Component {...pageProps} />
-              <Box pt={4}>
-                <CopyLeft />
-              </Box>
+              <Grid
+                container
+                direction='row'
+                justify='center'
+                alignItems='center'>
+                <Grid className={classes.circleProgress} item>
+                  <CopyLeft />
+                </Grid>
+              </Grid>
             </Container>
           </main>
         </div>

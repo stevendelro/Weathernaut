@@ -110,11 +110,6 @@ const useStyles = makeStyles(theme => ({
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
   },
-
-  linearProgressBar: {
-    width: '100%',
-    marginTop: '65px',
-  },
 }))
 
 export default useStyles

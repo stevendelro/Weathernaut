@@ -8,7 +8,6 @@ import Title from '../Title'
 import getCardinalDirection from '../../util/getCardinalDirection'
 
 function RightNowTable({ currently }) {
-
   const percentProbability = `${currently.precipProbability.toFixed(0)}%`
   const humidity = `${(currently.humidity * 100).toFixed(0)}%`
   const pressure = `${(currently.pressure * 0.0295301).toFixed(2)} in`

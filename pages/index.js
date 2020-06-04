@@ -12,18 +12,12 @@ const useStyles = makeStyles(theme => ({
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
-  },
-  linearProgressBar: {
-    width: '100%',
-    marginTop: '65px',
-  },
+  }
 }))
 
 const Index = props => {
   const classes = useStyles()
-  const [renderedComponent, setRenderedComponent] = useState(
-    <LinearProgress className={classes.linearProgressBar} color='secondary' />
-  )
+  const [renderedComponent, setRenderedComponent] = useState(null)
 
   const {
     // Action creators
