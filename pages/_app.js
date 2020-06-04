@@ -10,10 +10,10 @@ import Drawer from '../components/Layout/Drawer/Drawer'
 import theme from '../styles/theme/theme'
 import { wrapper } from '../store/store'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   content: {
     width: '100%',
-    marginTop: '57px',
+    marginTop: '84px',
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
@@ -21,7 +21,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function MyApp(props) {
-  const [place, setPlace] = useState('')
   const [openDrawer, setOpenDrawer] = useState(false)
   const [appBarTitle, setAppBarTitle] = useState('React Weather Dashboard')
 
@@ -51,8 +50,6 @@ function MyApp(props) {
           <AppBar
             openDrawer={openDrawer}
             setOpenDrawer={setOpenDrawer}
-            place={place}
-            setPlace={setPlace}
             appBarTitle={appBarTitle}
           />
           <Drawer

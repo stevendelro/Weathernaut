@@ -29,7 +29,7 @@ function Next24Chart({ weather }) {
         },
       ])
     })
-  }, [weather.hourly.data])
+  }, [weather])
 
   return (
     <>

@@ -20,7 +20,7 @@ const MainListItems = props => {
   const closeDrawerAndShowSearch = event => {
     event.preventDefault()
     closeDrawer()
-    Router.push('/search')
+    Router.push('/')
   }
 
   const closeDrawerAndShowPage = (page, place) => event => {

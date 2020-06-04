@@ -48,7 +48,7 @@ function NotFoundPage({ placeName }) {
         <Grid item>
           <Button
             as='a'
-            color='disabled'
+            color='primary'
             onClick={event => goHome(placeName)(event)}>
             <HomeOutlinedIcon color='disabled' fontSize='large' />
           </Button>
