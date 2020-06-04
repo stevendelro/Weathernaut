@@ -1,6 +1,8 @@
 import clsx from 'clsx'
+import { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import Router from 'next/router'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import MenuIcon from '@material-ui/icons/Menu'
@@ -9,35 +11,62 @@ import InputBase from '@material-ui/core/InputBase'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import useStyles from './useStyles'
-import { getWeather } from '../../../store/weather/action'
+import {
+  startLocationFetchByPlaceName,
+  getLocationByPlaceName,
+} from '../../../store/location/action'
+import {
+  startWeatherFetch,
+  getWeatherByCoords,
+} from '../../../store/weather/action'
+
 
 function MyAppBar(props) {
+  const [userInput, setUserInput] = useState('')
   const classes = useStyles()
 
-  // Passed down from parent
   const {
+    // Action Creators
+    startLocationFetchByPlaceName,
+    getLocationByPlaceName,
+    startWeatherFetch,
+    getWeatherByCoords,
+    // State
+    urlSlug,
+    latitude,
+    longitude,
+    noWeatherData,
+    deniedGeolocation,
+    // From parent
     openDrawer,
     setOpenDrawer,
-    place,
-    setPlace,
     appBarTitle,
-  } = props
-
-  // From mapStateToProps
-  const {
-    weather,
-    geolocation,
   } = props
 
   const handleDrawerOpen = () => {
     setOpenDrawer(true)
   }
 
-  const submitHandler = async e => {
-    e.preventDefault()
-    await props.getWeather(place)
-    setPlace('')
+
+  const submitHandler = async event => {
+    event.preventDefault()
+    startLocationFetchByPlaceName()
+    await getLocationByPlaceName(userInput)
+    setUserInput('')
   }
+
+  useEffect(() => {
+    if (latitude && longitude) {
+      startWeatherFetch()
+      getWeatherByCoords([latitude, longitude])
+    }
+  }, [latitude, longitude])
+
+  useEffect(() => {
+    if (!noWeatherData) {
+      Router.push('/home/[location]', `/home/${urlSlug}`)
+    }
+  }, [noWeatherData])
 
   return (
     <AppBar
@@ -64,8 +93,8 @@ function MyAppBar(props) {
           {appBarTitle}
         </Typography>
 
-        {/* Search will appear in Welcome page if geolocation position is initially denied. */}
-        {weather.noWeatherData && geolocation.deniedGeolocation ? null : (
+        {/* Remove search input from AppBar if <Search /> is rendered. */}
+        {noWeatherData && deniedGeolocation ? null : (
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -78,8 +107,8 @@ function MyAppBar(props) {
                   input: classes.inputInput,
                 }}
                 inputProps={{ 'aria-label': 'search' }}
-                value={place}
-                onChange={e => setPlace(e.target.value)}
+                value={userInput}
+                onChange={event => setUserInput(event.target.value)}
               />
             </form>
           </div>
@@ -89,14 +118,24 @@ function MyAppBar(props) {
   )
 }
 
-function mapStateToProps({ weather }) {
-  return { weather }
-}
-
 const mapDispatchToProps = dispatch => {
   return {
-    getWeather: bindActionCreators(getWeather, dispatch),
+    startLocationFetchByPlaceName: bindActionCreators(
+      startLocationFetchByPlaceName,
+      dispatch
+    ),
+    getLocationByPlaceName: bindActionCreators(
+      getLocationByPlaceName,
+      dispatch
+    ),
+    startWeatherFetch: bindActionCreators(startWeatherFetch, dispatch),
+    getWeatherByCoords: bindActionCreators(getWeatherByCoords, dispatch),
   }
 }
-
+function mapStateToProps({ location, weather }) {
+  const { urlSlug, latitude, longitude, deniedGeolocation } = location
+  const { noWeatherData } = weather
+  return { urlSlug, latitude, longitude, noWeatherData, deniedGeolocation }
+}
 export default connect(mapStateToProps, mapDispatchToProps)(MyAppBar)
+

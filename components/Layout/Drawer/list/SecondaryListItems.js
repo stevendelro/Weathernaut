@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import Router from 'next/router'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -10,18 +12,53 @@ import TranslateIcon from '@material-ui/icons/Translate'
 import MovieFilterIcon from '@material-ui/icons/MovieFilter'
 import LocationCityIcon from '@material-ui/icons/LocationCity'
 import AirportShuttleIcon from '@material-ui/icons/AirportShuttle'
-import { getWeather } from '../../../../store/weather/action'
+import {
+  startLocationFetchByPlaceName,
+  getLocationByPlaceName,
+} from '../../../../store/location/action'
+import {
+  startWeatherFetch,
+  getWeatherByCoords,
+} from '../../../../store/weather/action'
+
 
 function SecondaryListItems(props) {
-  const { closeDrawer } = props
+  const {
+    // Action creators
+    startLocationFetchByPlaceName,
+    getLocationByPlaceName,
+    startWeatherFetch,
+    getWeatherByCoords,
+    // State
+    urlSlug,
+    latitude,
+    longitude,
+    noWeatherData,
+    // From parent
+    closeDrawer,
+  } = props
 
-  function handleClick(event) {
+  const handleClick = async event => {
+    event.preventDefault()
     closeDrawer()
-    props.getWeather(event.currentTarget.attributes.value.value)
+    startLocationFetchByPlaceName()
+    await getLocationByPlaceName(event.currentTarget.attributes.value.value)
+  }
+
+  useEffect(() => {
+    if (latitude && longitude) {
+      startWeatherFetch()
+      getWeatherByCoords([latitude, longitude])
+      goHome()
+    }
+  }, [latitude, longitude])
+
+  const goHome = () => {
+    Router.push('/home/[location]', `/home/${urlSlug}`)
   }
 
   return (
-    <div>
+    <>
       <ListSubheader inset>Quick Links</ListSubheader>
       <ListItem button onClick={handleClick} value='los angeles'>
         <ListItemIcon>
@@ -59,13 +96,27 @@ function SecondaryListItems(props) {
         </ListItemIcon>
         <ListItemText primary='Beijing' />
       </ListItem>
-    </div>
+    </>
   )
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getWeather: bindActionCreators(getWeather, dispatch),
+    startLocationFetchByPlaceName: bindActionCreators(
+      startLocationFetchByPlaceName,
+      dispatch
+    ),
+    getLocationByPlaceName: bindActionCreators(
+      getLocationByPlaceName,
+      dispatch
+    ),
+    startWeatherFetch: bindActionCreators(startWeatherFetch, dispatch),
+    getWeatherByCoords: bindActionCreators(getWeatherByCoords, dispatch),
   }
 }
-export default connect(null, mapDispatchToProps)(SecondaryListItems)
+function mapStateToProps({ location, weather }) {
+  const { urlSlug, latitude, longitude } = location
+  const { noWeatherData } = weather
+  return { urlSlug, latitude, longitude, noWeatherData }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SecondaryListItems)
