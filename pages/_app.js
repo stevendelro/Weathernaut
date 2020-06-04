@@ -25,7 +25,7 @@ const useStyles = makeStyles(() => ({
 
 function MyApp(props) {
   const [openDrawer, setOpenDrawer] = useState(false)
-  const [appBarTitle, setAppBarTitle] = useState('React Weather Dashboard')
+  const [appBarTitle, setAppBarTitle] = useState('WeatherNaught')
 
   const { Component, pageProps } = props
   const classes = useStyles()

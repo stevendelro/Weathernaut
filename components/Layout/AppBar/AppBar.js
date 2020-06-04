@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Router from 'next/router'
+import Hidden from '@material-ui/core/Hidden'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import MenuIcon from '@material-ui/icons/Menu'
@@ -19,7 +20,6 @@ import {
   startWeatherFetch,
   getWeatherByCoords,
 } from '../../../store/weather/action'
-
 
 function MyAppBar(props) {
   const [userInput, setUserInput] = useState('')
@@ -47,7 +47,6 @@ function MyAppBar(props) {
     setOpenDrawer(true)
   }
 
-
   const submitHandler = async event => {
     event.preventDefault()
     startLocationFetchByPlaceName()
@@ -69,9 +68,7 @@ function MyAppBar(props) {
   }, [noWeatherData])
 
   return (
-    <AppBar
-      position='absolute'
-      className={clsx(classes.appBar, openDrawer && classes.appBarShift)}>
+    <AppBar position='absolute' className='classes.appBar'>
       <Toolbar className={classes.toolbar}>
         <IconButton
           edge='start'
@@ -84,14 +81,16 @@ function MyAppBar(props) {
           )}>
           <MenuIcon />
         </IconButton>
-        <Typography
-          component='h1'
-          variant='h6'
-          color='inherit'
-          noWrap
-          className={classes.title}>
-          {appBarTitle}
-        </Typography>
+        <Hidden only='xs'>
+          <Typography
+            component='h1'
+            variant='h6'
+            color='inherit'
+            noWrap
+            className={classes.title}>
+            {appBarTitle}
+          </Typography>
+        </Hidden>
 
         {/* Remove search input from AppBar if <Search /> is rendered. */}
         {noWeatherData && deniedGeolocation ? null : (
@@ -138,4 +137,3 @@ function mapStateToProps({ location, weather }) {
   return { urlSlug, latitude, longitude, noWeatherData, deniedGeolocation }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MyAppBar)
-

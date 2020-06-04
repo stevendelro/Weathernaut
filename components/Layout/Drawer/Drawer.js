@@ -22,7 +22,7 @@ function MyDrawer({
 
   return (
     <Drawer
-      variant='permanent'
+      variant='temporary'
       style={{ height: '100vh' }}
       classes={{
         paper: clsx(
