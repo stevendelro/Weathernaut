@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
-import Container from '@material-ui/core/Container'
 import { makeStyles } from '@material-ui/core/styles'
 import MyMap from '../../components/home/MyMap'
 import CurrentTemp from '../../components/home/CurrentTemp'
@@ -17,10 +16,6 @@ const useStyles = makeStyles(theme => ({
     height: '100vh',
     overflow: 'auto',
   },
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
   paper: {
     padding: theme.spacing(2),
     display: 'flex',
@@ -32,43 +27,40 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const HomeByLocation = props => {
+function Home() {
   const classes = useStyles()
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
-
   return (
-    <Container maxWidth='lg' className={classes.container}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <MyMap />
-        </Grid>
-
-        <Grid item xs={12} md={4}>
-          <Paper className={fixedHeightPaper}>
-            <CurrentTemp />
-          </Paper>
-        </Grid>
-
-        <Grid item xs={12} md={8}>
-          <Paper className={fixedHeightPaper}>
-            <UpcomingWeek />
-          </Paper>
-        </Grid>
-
-        <Grid item xs={12} md={4} lg={3}>
-          <Paper className={fixedHeightPaper}>
-            <RightNowTable />
-          </Paper>
-        </Grid>
-
-        <Grid item xs={12} md={8} lg={9}>
-          <Paper className={fixedHeightPaper}>
-            <Next24Chart />
-          </Paper>
-        </Grid>
+    <Grid container spacing={3}>
+      <Grid item xs={12}>
+        <MyMap />
       </Grid>
-    </Container>
+
+      <Grid item xs={12} md={4}>
+        <Paper className={fixedHeightPaper}>
+          <CurrentTemp />
+        </Paper>
+      </Grid>
+
+      <Grid item xs={12} md={8}>
+        <Paper className={fixedHeightPaper}>
+          <UpcomingWeek />
+        </Paper>
+      </Grid>
+
+      <Grid item xs={12} md={4} lg={3}>
+        <Paper className={fixedHeightPaper}>
+          <RightNowTable />
+        </Paper>
+      </Grid>
+
+      <Grid item xs={12} md={8} lg={9}>
+        <Paper className={fixedHeightPaper}>
+          <Next24Chart />
+        </Paper>
+      </Grid>
+    </Grid>
   )
 }
 
-export default HomeByLocation
+export default Home
