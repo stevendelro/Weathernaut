@@ -19,7 +19,8 @@ function HourBarometer({ weather }) {
   const [chartData, setChartData] = useState([])
 
   useEffect(() => {
-    weather.hourly.data.forEach(hour => {
+    const next24Hours = weather.hourly.data.slice(0, 25)
+    next24Hours.forEach(hour => {
       setChartData(prev => [
         ...prev,
         {

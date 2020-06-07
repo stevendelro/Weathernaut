@@ -21,7 +21,6 @@ function Next24Chart({ weather }) {
   useEffect(() => {
     const next24hours = weather.hourly.data.slice(0, 25)
     next24hours.forEach(hour => {
-      console.log('useEffect in Next24')
       setHourlyTemps(prev => [
         ...prev,
         {

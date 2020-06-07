@@ -13,13 +13,14 @@ import Title from '../Title'
 
 // AREA CHART COLORS
 const gradientFillHigh = '#FFE499'
-const lineStrokeHigh= '#FFBC00'
+const lineStrokeHigh = '#FFBC00'
 
 function HourTemp({ weather }) {
   const [chartData, setChartData] = useState([])
 
   useEffect(() => {
-    weather.hourly.data.forEach(hour => {
+    const next24Hours = weather.hourly.data.slice(0, 25)
+    next24Hours.forEach(hour => {
       setChartData(prev => [
         ...prev,
         {
@@ -45,7 +46,11 @@ function HourTemp({ weather }) {
           }}>
           <defs>
             <linearGradient id='tempGradient' x1='0' y1='0' x2='0' y2='1'>
-              <stop offset='1%' stopColor={gradientFillHigh} stopOpacity={0.8} />
+              <stop
+                offset='1%'
+                stopColor={gradientFillHigh}
+                stopOpacity={0.8}
+              />
               <stop offset='99%' stopColor={gradientFillHigh} stopOpacity={0} />
             </linearGradient>
           </defs>
