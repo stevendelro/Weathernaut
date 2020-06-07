@@ -19,7 +19,9 @@ function Next24Chart({ weather }) {
   const [hourlyTemps, setHourlyTemps] = useState([])
 
   useEffect(() => {
-    weather.hourly.data.forEach(hour => {
+    const next24hours = weather.hourly.data.slice(0, 25)
+    next24hours.forEach(hour => {
+      console.log('useEffect in Next24')
       setHourlyTemps(prev => [
         ...prev,
         {
@@ -29,14 +31,14 @@ function Next24Chart({ weather }) {
         },
       ])
     })
-  }, [weather])
+  }, [weather.hourly.data])
 
   return (
     <>
       <Title>24 Hours</Title>
       <ResponsiveContainer>
         <AreaChart
-          data={hourlyTemps.slice(0, 25)}
+          data={hourlyTemps}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id='temps' x1='0' y1='0' x2='0' y2='1'>
