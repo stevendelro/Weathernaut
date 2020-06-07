@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Router from 'next/router'
@@ -20,6 +20,7 @@ import {
   startWeatherFetch,
   getWeatherByCoords,
 } from '../../../store/weather/action'
+import getShortName from '../../../util/getShortName'
 
 function MyAppBar(props) {
   const [userInput, setUserInput] = useState('')
@@ -32,9 +33,6 @@ function MyAppBar(props) {
     startWeatherFetch,
     getWeatherByCoords,
     // State
-    urlSlug,
-    latitude,
-    longitude,
     noWeatherData,
     deniedGeolocation,
     // From parent
@@ -48,24 +46,20 @@ function MyAppBar(props) {
   }
 
   const submitHandler = async event => {
+    let slug
     event.preventDefault()
     startLocationFetchByPlaceName()
     await getLocationByPlaceName(userInput)
-    setUserInput('')
+      .then(locationData => {
+        slug = getShortName(locationData.placeName.toLowerCase())
+        setUserInput('')
+        startWeatherFetch()
+        getWeatherByCoords([locationData.latitude, locationData.longitude])
+      })
+      .then(() => {
+        Router.push('/home/[location]', `/home/${slug}`)
+      })
   }
-
-  useEffect(() => {
-    if (latitude && longitude) {
-      startWeatherFetch()
-      getWeatherByCoords([latitude, longitude])
-    }
-  }, [latitude, longitude])
-
-  useEffect(() => {
-    if (!noWeatherData) {
-      Router.push('/home/[location]', `/home/${urlSlug}`)
-    }
-  }, [noWeatherData])
 
   return (
     <AppBar position='absolute' className='classes.appBar'>
@@ -132,8 +126,8 @@ const mapDispatchToProps = dispatch => {
   }
 }
 function mapStateToProps({ location, weather }) {
-  const { urlSlug, latitude, longitude, deniedGeolocation } = location
+  const { deniedGeolocation } = location
   const { noWeatherData } = weather
-  return { urlSlug, latitude, longitude, noWeatherData, deniedGeolocation }
+  return { noWeatherData, deniedGeolocation }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MyAppBar)

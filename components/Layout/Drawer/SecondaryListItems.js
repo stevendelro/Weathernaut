@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Router from 'next/router'
@@ -12,6 +11,7 @@ import TranslateIcon from '@material-ui/icons/Translate'
 import MovieFilterIcon from '@material-ui/icons/MovieFilter'
 import LocationCityIcon from '@material-ui/icons/LocationCity'
 import AirportShuttleIcon from '@material-ui/icons/AirportShuttle'
+import getShortName from '../../../util/getShortName'
 import {
   startLocationFetchByPlaceName,
   getLocationByPlaceName,
@@ -28,31 +28,25 @@ function SecondaryListItems(props) {
     getLocationByPlaceName,
     startWeatherFetch,
     getWeatherByCoords,
-    // State
-    urlSlug,
-    latitude,
-    longitude,
     // From parent
     closeDrawer,
   } = props
 
   const handleClick = async event => {
+    let slug
+    const locationName = event.currentTarget.attributes.value.value
     event.preventDefault()
     closeDrawer()
     startLocationFetchByPlaceName()
-    await getLocationByPlaceName(event.currentTarget.attributes.value.value)
-  }
-
-  useEffect(() => {
-    if (latitude && longitude) {
-      startWeatherFetch()
-      getWeatherByCoords([latitude, longitude])
-      goHome()
-    }
-  }, [latitude, longitude])
-
-  const goHome = () => {
-    Router.push('/home/[location]', `/home/${urlSlug}`)
+    await getLocationByPlaceName(locationName)
+      .then(locationData => {
+        slug = getShortName(locationData.placeName.toLowerCase())
+        startWeatherFetch()
+        getWeatherByCoords([locationData.latitude, locationData.longitude])
+      })
+      .then(() => {
+        Router.push('/home/[location]', `/home/${slug}`)
+      })
   }
 
   return (
@@ -112,8 +106,4 @@ const mapDispatchToProps = dispatch => {
     getWeatherByCoords: bindActionCreators(getWeatherByCoords, dispatch),
   }
 }
-function mapStateToProps({ location }) {
-  const { urlSlug, latitude, longitude } = location
-  return { urlSlug, latitude, longitude }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(SecondaryListItems)
+export default connect(null, mapDispatchToProps)(SecondaryListItems)
