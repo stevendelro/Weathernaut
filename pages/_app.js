@@ -6,7 +6,7 @@ import Container from '@material-ui/core/Container'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import AppBar from '../components/Layout/AppBar/AppBar'
 import Drawer from '../components/Layout/Drawer/Drawer'
-import CopyLeft from '../components/CopyLeft'
+import NameStamp from '../components/NameStamp'
 import { ThemeProvider, makeStyles } from '@material-ui/core/styles'
 import theme from '../styles/theme/theme'
 
@@ -18,9 +18,10 @@ const useStyles = makeStyles(() => ({
     height: '100vh',
     overflow: 'auto',
   },
-  circleProgress: {
-    marginTop: '33vh'
-  }
+  nameStamp: {
+    paddingTop: '1.5rem',
+    paddingBottom: '1rem',
+  },
 }))
 
 function MyApp(props) {
@@ -65,11 +66,11 @@ function MyApp(props) {
               <Component {...pageProps} />
               <Grid
                 container
-                direction='row'
+                direction='column'
                 justify='center'
                 alignItems='center'>
-                <Grid className={classes.circleProgress} item>
-                  <CopyLeft />
+                <Grid className={classes.nameStamp} item>
+                  <NameStamp />
                 </Grid>
               </Grid>
             </Container>

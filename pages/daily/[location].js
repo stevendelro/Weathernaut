@@ -1,6 +1,5 @@
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
-import Container from '@material-ui/core/Container'
 import { makeStyles } from '@material-ui/core/styles'
 import DailyTable from '../../components/daily/DailyTable'
 import DailyTemps from '../../components/daily/DailyTemps'
@@ -17,16 +16,11 @@ const useStyles = makeStyles(theme => ({
     overflow: 'auto',
     flexDirection: 'column',
   },
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
 }))
 
 function DailyPage() {
   const classes = useStyles()
   return (
-    <Container className={classes.container}>
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <DailyTable />
@@ -62,7 +56,6 @@ function DailyPage() {
           </Paper>
         </Grid>
       </Grid>
-    </Container>
   )
 }
 
