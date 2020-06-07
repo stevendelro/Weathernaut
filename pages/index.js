@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 
 const Index = props => {
   const classes = useStyles()
-  const [renderedComponent, setRenderedComponent] = useState(null)
+  const [renderedComponent, setRenderedComponent] = useState(<></>)
 
   const {
     // Action creators
