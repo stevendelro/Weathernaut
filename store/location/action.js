@@ -29,12 +29,12 @@ export const getLocationByCoords = coords => async dispatch => {
         type: locationActions.LOCATION_FETCHED,
         payload: data,
       })
+      return data
     })
     .catch(error => console.log('getLocationByCoords ERROR', error.message))
 
   if (res) {
-    const { place, latitude, longitude } = res.data
-    return { place, latitude, longitude }
+    return res
   }
 }
 
@@ -47,11 +47,11 @@ export const getLocationByPlaceName = placeName => async dispatch => {
         type: locationActions.LOCATION_FETCHED,
         payload: data,
       })
+      return data
     })
     .catch(error => console.log('getLocationByPlaceName ERROR', error.message))
 
   if (res) {
-    const { place, latitude, longitude } = res.data
-    return { place, latitude, longitude }
+    return res
   }
 }

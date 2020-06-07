@@ -21,10 +21,10 @@ export const getWeatherByCoords = coords => async dispatch => {
         type: weatherActions.WEATHER_FETCHED,
         payload: data,
       })
+      return data
     })
     .catch(error => console.log('ERROR in getWeatherByCoords: ', error.message))
   if (res) {
-    const { weatherData } = res
-    return { weatherData }
+    return res
   }
 }
