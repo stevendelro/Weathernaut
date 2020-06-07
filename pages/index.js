@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
-  },
+  }
 }))
 
 const Index = props => {
@@ -74,6 +74,7 @@ const mapDispatchToProps = dispatch => {
     getWeatherByCoords: bindActionCreators(getWeatherByCoords, dispatch),
     getLocationByCoords: bindActionCreators(getLocationByCoords, dispatch),
     logLastCity: bindActionCreators(logLastCity, dispatch),
+    denyGeo: bindActionCreators(denyGeo, dispatch),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Index)
