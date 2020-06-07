@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { makeStyles } from '@material-ui/core/styles'
-import LinearProgress from '@material-ui/core/LinearProgress'
 import Container from '@material-ui/core/Container'
 import { logLastCity } from '../store/history/action'
 import { getWeatherByCoords } from '../store/weather/action'
@@ -12,7 +11,7 @@ const useStyles = makeStyles(theme => ({
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
-  }
+  },
 }))
 
 const Index = props => {
@@ -27,10 +26,7 @@ const Index = props => {
     denyGeo,
 
     //State
-    noWeatherData,
-    loading,
     placeName,
-    deniedGeolocation,
   } = props
 
   // Get permission to use browser's geolocation API
@@ -68,10 +64,9 @@ const Index = props => {
   )
 }
 
-function mapStateToProps({ location, weather }) {
-  const { noWeatherData, loading } = weather
-  const { placeName, deniedGeolocation } = location
-  return { noWeatherData, loading, placeName, deniedGeolocation }
+function mapStateToProps({ location }) {
+  const { placeName } = location
+  return { placeName }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -79,7 +74,6 @@ const mapDispatchToProps = dispatch => {
     getWeatherByCoords: bindActionCreators(getWeatherByCoords, dispatch),
     getLocationByCoords: bindActionCreators(getLocationByCoords, dispatch),
     logLastCity: bindActionCreators(logLastCity, dispatch),
-    denyGeo: bindActionCreators(denyGeo, dispatch),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Index)

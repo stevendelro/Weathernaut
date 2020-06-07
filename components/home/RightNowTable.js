@@ -54,7 +54,7 @@ function RightNowTable({ currently }) {
             <TableRow hover={true}>
               <TableCell size='small'>Wind</TableCell>
               <TableCell align='right' size='small'>
-                `${cardinalDirection} ${windSpeed}`
+                {`${cardinalDirection} ${windSpeed}`}
               </TableCell>
             </TableRow>
 

@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react'
 import Head from 'next/head'
+import { useState, useEffect } from 'react'
+import { wrapper } from '../store/store'
 import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { ThemeProvider, makeStyles } from '@material-ui/core/styles'
-import CopyLeft from '../components/CopyLeft'
 import AppBar from '../components/Layout/AppBar/AppBar'
 import Drawer from '../components/Layout/Drawer/Drawer'
+import CopyLeft from '../components/CopyLeft'
+import { ThemeProvider, makeStyles } from '@material-ui/core/styles'
 import theme from '../styles/theme/theme'
-import { wrapper } from '../store/store'
 
 const useStyles = makeStyles(() => ({
   content: {
@@ -24,11 +24,11 @@ const useStyles = makeStyles(() => ({
 }))
 
 function MyApp(props) {
-  const [openDrawer, setOpenDrawer] = useState(false)
-  const [appBarTitle, setAppBarTitle] = useState('WeatherNaught')
-
   const { Component, pageProps } = props
+  const [openDrawer, setOpenDrawer] = useState(false)
+  const [appBarTitle, setAppBarTitle] = useState('Weathernaut')
   const classes = useStyles()
+
   useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side')
@@ -40,7 +40,7 @@ function MyApp(props) {
   return (
     <>
       <Head>
-        <title>My page</title>
+        <title>Weathernaut</title>
         <meta
           name='viewport'
           content='minimum-scale=1, initial-scale=1, width=device-width'

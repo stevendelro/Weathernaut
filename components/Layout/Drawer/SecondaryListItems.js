@@ -15,12 +15,11 @@ import AirportShuttleIcon from '@material-ui/icons/AirportShuttle'
 import {
   startLocationFetchByPlaceName,
   getLocationByPlaceName,
-} from '../../../../store/location/action'
+} from '../../../store/location/action'
 import {
   startWeatherFetch,
   getWeatherByCoords,
-} from '../../../../store/weather/action'
-
+} from '../../../store/weather/action'
 
 function SecondaryListItems(props) {
   const {
@@ -33,7 +32,6 @@ function SecondaryListItems(props) {
     urlSlug,
     latitude,
     longitude,
-    noWeatherData,
     // From parent
     closeDrawer,
   } = props
@@ -114,9 +112,8 @@ const mapDispatchToProps = dispatch => {
     getWeatherByCoords: bindActionCreators(getWeatherByCoords, dispatch),
   }
 }
-function mapStateToProps({ location, weather }) {
+function mapStateToProps({ location }) {
   const { urlSlug, latitude, longitude } = location
-  const { noWeatherData } = weather
-  return { urlSlug, latitude, longitude, noWeatherData }
+  return { urlSlug, latitude, longitude }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SecondaryListItems)

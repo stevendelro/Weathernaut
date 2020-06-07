@@ -7,15 +7,18 @@ import LocationOnIcon from '@material-ui/icons/LocationOn'
 import HistoryIcon from '@material-ui/icons/History'
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder'
 import DateRangeIcon from '@material-ui/icons/DateRange'
-import getShortName from '../../../../util/getShortName'
-import capitalizeFirstLetter from '../../../../util/capitalizeFirstLetter'
+import getShortName from '../../../util/getShortName'
+import capitalizeFirstLetter from '../../../util/capitalizeFirstLetter'
 
 const MainListItems = props => {
-  // From parent
-  const { setAppBarTitle, closeDrawer } = props
-
-  // From connect
-  const { noWeatherData, placeName } = props
+  const {
+    // From parent
+    setAppBarTitle,
+    closeDrawer,
+    // State
+    noWeatherData,
+    placeName,
+  } = props
 
   const closeDrawerAndShowSearch = event => {
     event.preventDefault()
