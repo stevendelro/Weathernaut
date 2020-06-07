@@ -24,7 +24,7 @@ export default function reducer(state = locationInitialState, action) {
         latitude: action.payload.latitude,
         longitude: action.payload.longitude,
         searchedTerm: action.payload.searchedTerm,
-        urlSlug: getShortName(action.payload.placeName.toLowerCase())
+        urlSlug: getShortName(action.payload.placeName)
       }
     case locationActions.START_LOCATION_FETCH_BY_COORDS:
       return {
