@@ -9,6 +9,7 @@ import FormControl from '@material-ui/core/FormControl'
 import OutlinedInput from '@material-ui/core/OutlinedInput'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import { makeStyles } from '@material-ui/core/styles'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 import {
   startLocationFetchByPlaceName,
@@ -28,6 +29,7 @@ const useStyles = makeStyles(theme => ({
 
 function SearchPage(props) {
   const [userInput, setUserInput] = useState('')
+  const [showSpinner, setShowSpinner] = useState(false)
   const classes = useStyles()
   const {
     // Action Creators
@@ -44,6 +46,7 @@ function SearchPage(props) {
 
   const submitHandler = async event => {
     event.preventDefault()
+    setShowSpinner(true)
     startLocationFetchByPlaceName()
     await getLocationByPlaceName(userInput)
   }
@@ -69,25 +72,35 @@ function SearchPage(props) {
         justify='center'
         alignItems='center'
         spacing={3}>
-        <Grid item xs={12} md={8} lg={6}>
-          <form onSubmit={submitHandler}>
-            <FormControl
-              fullWidth
-              className={classes.margin}
-              variant='outlined'>
-              <OutlinedInput
-                id='outlined-adornment-amount'
-                value={userInput}
-                onChange={e => setUserInput(e.target.value)}
-                startAdornment={
-                  <InputAdornment position='start'>
-                    <SearchIcon color='disabled' />
-                  </InputAdornment>
-                }
-              />
-            </FormControl>
-          </form>
-        </Grid>
+        {showSpinner ? (
+          <Grid item>
+            <CircularProgress
+              color='secondary'
+              style={{ height: '100px', width: '100px' }}
+              justify='center'
+            />
+          </Grid>
+        ) : (
+          <Grid item xs={12} md={8} lg={6}>
+            <form onSubmit={submitHandler}>
+              <FormControl
+                fullWidth
+                className={classes.margin}
+                variant='outlined'>
+                <OutlinedInput
+                  id='outlined-adornment-amount'
+                  value={userInput}
+                  onChange={e => setUserInput(e.target.value)}
+                  startAdornment={
+                    <InputAdornment position='start'>
+                      <SearchIcon color='disabled' />
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+            </form>
+          </Grid>
+        )}
       </Grid>
     </Container>
   )
