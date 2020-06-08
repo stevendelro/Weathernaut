@@ -1,6 +1,6 @@
 {
-  "name": "with-redux-wrapper",
-  "version": "1.0.0",
+  "name": "weathernaut",
+  "version": "3.0.0",
   "scripts": {
     "dev": "next",
     "build": "next build",
