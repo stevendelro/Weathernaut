@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
-import { wrapper } from '../store/store'
+import moment from 'moment'
 import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -9,6 +9,7 @@ import Drawer from '../components/Layout/Drawer/Drawer'
 import NameStamp from '../components/NameStamp'
 import { ThemeProvider, makeStyles } from '@material-ui/core/styles'
 import theme from '../styles/theme/theme'
+import { wrapper } from '../store/store'
 
 const useStyles = makeStyles(() => ({
   content: {
@@ -25,9 +26,10 @@ const useStyles = makeStyles(() => ({
 }))
 
 function MyApp(props) {
+  const dateToday = moment().format('dddd, MMMM Do')
   const { Component, pageProps } = props
   const [openDrawer, setOpenDrawer] = useState(false)
-  const [appBarTitle, setAppBarTitle] = useState('Weathernaut')
+  const [appBarTitle, setAppBarTitle] = useState(`Weathernaut - ${dateToday}`)
   const classes = useStyles()
 
   useEffect(() => {

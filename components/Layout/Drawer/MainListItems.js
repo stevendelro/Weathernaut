@@ -1,5 +1,6 @@
-import { connect } from 'react-redux'
 import Router from 'next/router'
+import { connect } from 'react-redux'
+import moment from 'moment'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -8,9 +9,11 @@ import HistoryIcon from '@material-ui/icons/History'
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder'
 import DateRangeIcon from '@material-ui/icons/DateRange'
 import getShortName from '../../../util/getShortName'
-import capitalizeFirstLetter from '../../../util/capitalizeFirstLetter'
 
 const MainListItems = props => {
+  const dateToday = moment().format('dddd, MMMM Do')
+  const startOfWeek = moment().add(1, 'days').format('MMMM Do')
+  const endOfWeek = moment().add(7, 'days').format('MMMM Do')
   const {
     // From parent
     setAppBarTitle,
@@ -40,7 +43,21 @@ const MainListItems = props => {
           `/${getShortName(lowerCasePlace)}/${page}`
         )
       : Router.push(`/${page}`)
-    setAppBarTitle(capitalizeFirstLetter(page))
+
+      switch (page) {
+        case 'hourly':
+          setAppBarTitle(`${dateToday} - By The Hour`)
+          break;
+        case 'daily':
+          setAppBarTitle(`${startOfWeek} → ${endOfWeek}`)
+          break;
+        case 'home':
+          setAppBarTitle(dateToday)
+          break;
+
+        default:
+          break;
+      }
   }
 
   return (
