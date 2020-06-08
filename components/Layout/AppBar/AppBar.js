@@ -20,6 +20,7 @@ import {
   startWeatherFetch,
   getWeatherByCoords,
 } from '../../../store/weather/action'
+import { logLastCity } from '../../../store/history/action'
 import getShortName from '../../../util/getShortName'
 
 function MyAppBar(props) {
@@ -32,6 +33,7 @@ function MyAppBar(props) {
     getLocationByPlaceName,
     startWeatherFetch,
     getWeatherByCoords,
+    logLastCity,
     // State
     noWeatherData,
     deniedGeolocation,
@@ -51,6 +53,7 @@ function MyAppBar(props) {
     startLocationFetchByPlaceName()
     await getLocationByPlaceName(userInput)
       .then(locationData => {
+        logLastCity(locationData.placeName)
         slug = getShortName(locationData.placeName.toLowerCase())
         setUserInput('')
         startWeatherFetch()
@@ -123,6 +126,7 @@ const mapDispatchToProps = dispatch => {
     ),
     startWeatherFetch: bindActionCreators(startWeatherFetch, dispatch),
     getWeatherByCoords: bindActionCreators(getWeatherByCoords, dispatch),
+    logLastCity: bindActionCreators(logLastCity, dispatch),
   }
 }
 function mapStateToProps({ location, weather }) {

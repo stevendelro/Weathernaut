@@ -20,6 +20,7 @@ import {
   startWeatherFetch,
   getWeatherByCoords,
 } from '../../../store/weather/action'
+import { logLastCity } from '../../../store/history/action'
 
 function SecondaryListItems(props) {
   const {
@@ -28,6 +29,7 @@ function SecondaryListItems(props) {
     getLocationByPlaceName,
     startWeatherFetch,
     getWeatherByCoords,
+    logLastCity,
     // From parent
     closeDrawer,
   } = props
@@ -40,6 +42,7 @@ function SecondaryListItems(props) {
     startLocationFetchByPlaceName()
     await getLocationByPlaceName(locationName)
       .then(locationData => {
+        logLastCity(locationData.placeName)
         slug = getShortName(locationData.placeName.toLowerCase())
         startWeatherFetch()
         getWeatherByCoords([locationData.latitude, locationData.longitude])
@@ -104,6 +107,7 @@ const mapDispatchToProps = dispatch => {
     ),
     startWeatherFetch: bindActionCreators(startWeatherFetch, dispatch),
     getWeatherByCoords: bindActionCreators(getWeatherByCoords, dispatch),
+    logLastCity: bindActionCreators(logLastCity, dispatch),
   }
 }
 export default connect(null, mapDispatchToProps)(SecondaryListItems)

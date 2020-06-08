@@ -28,10 +28,17 @@ const MainListItems = props => {
 
   const closeDrawerAndShowPage = (page, place) => event => {
     event.preventDefault()
-    let lowerCasePlace = place.toLowerCase()
     closeDrawer()
+    let lowerCasePlace
+    if (place) {
+      lowerCasePlace = place.toLowerCase()
+    }
+
     lowerCasePlace
-      ? Router.push(`/${page}/[location]`, `/${page}/${getShortName(lowerCasePlace)}`)
+      ? Router.push(
+          `/${page}/[location]`,
+          `/${page}/${getShortName(lowerCasePlace)}`
+        )
       : Router.push(`/${page}`)
     setAppBarTitle(capitalizeFirstLetter(page))
   }
