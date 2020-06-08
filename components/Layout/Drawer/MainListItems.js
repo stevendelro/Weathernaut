@@ -14,6 +14,7 @@ const MainListItems = props => {
   const dateToday = moment().format('dddd, MMMM Do')
   const startOfWeek = moment().add(1, 'days').format('MMMM Do')
   const endOfWeek = moment().add(7, 'days').format('MMMM Do')
+  
   const {
     // From parent
     setAppBarTitle,
@@ -32,18 +33,8 @@ const MainListItems = props => {
   const closeDrawerAndShowPage = (page, place) => event => {
     event.preventDefault()
     closeDrawer()
-    let lowerCasePlace
-    if (place) {
-      lowerCasePlace = place.toLowerCase()
-    }
 
-    lowerCasePlace
-      ? Router.push(
-          `/[location]/${page}`,
-          `/${getShortName(lowerCasePlace)}/${page}`
-        )
-      : Router.push(`/${page}`)
-
+    // Dynamic AppBar title based on route.
     switch (page) {
       case 'hourly':
         setAppBarTitle(`${dateToday} - By The Hour`)
@@ -54,10 +45,26 @@ const MainListItems = props => {
       case 'today':
         setAppBarTitle(dateToday)
         break
-
+      case 'history':
+        setAppBarTitle('Search History')
+        break
       default:
         break
     }
+
+    // Url formatting
+    let lowerCasePlace
+    if (place) {
+      lowerCasePlace = place.toLowerCase()
+    }
+
+    // Handle search history routing
+    lowerCasePlace
+      ? Router.push(
+          `/[location]/${page}`,
+          `/${getShortName(lowerCasePlace)}/${page}`
+        )
+      : Router.push(`/${page}`)
   }
 
   return (

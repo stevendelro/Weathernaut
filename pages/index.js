@@ -23,6 +23,17 @@ const Index = props => {
   const classes = useStyles()
   const [renderedComponent, setRenderedComponent] = useState(<></>)
 
+  const {
+    // Action creators
+    getWeatherByCoords,
+    getLocationByCoords,
+    logLastCity,
+    denyGeo,
+
+    //State
+    placeName,
+  } = props
+
   const spinner = (
     <Grid
       container
@@ -39,17 +50,6 @@ const Index = props => {
       </Grid>
     </Grid>
   )
-
-  const {
-    // Action creators
-    getWeatherByCoords,
-    getLocationByCoords,
-    logLastCity,
-    denyGeo,
-
-    //State
-    placeName,
-  } = props
 
   // Get permission to use browser's geolocation API
   const getPosition = async () => {

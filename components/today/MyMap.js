@@ -12,6 +12,7 @@ import Title from '../Title'
 function MyMap({ location, weather }) {
   const [key, setKey] = useState(undefined)
 
+  // Receive api key from backend
   useEffect(() => {
     axios.get(`/api/map/${key}`).then(res => setKey(res.data.key))
   }, [])

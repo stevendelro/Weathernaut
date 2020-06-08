@@ -11,9 +11,11 @@ export default function reducer(state = historyInitialState, action) {
   const now = moment()
   const getDate = now.format('L')
   const getTime = now.format('LTS')
-  
+
   switch (action.type) {
     case historyActionTypes.LOG_LAST_CITY:
+      
+      // Keep search history at last 7 searches
       if (state.historyList.length > 7) {
         return {
           ...state,

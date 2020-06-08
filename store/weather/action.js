@@ -1,7 +1,4 @@
 import axios from 'axios'
-import capitalizeFirstLetter from '../../util/capitalizeFirstLetter'
-import { getLocationByPlaceName } from '../location/action'
-import { logLastCity } from '../history/action'
 
 export const weatherActions = {
   START_WEATHER_FETCH: 'START_WEATHER_FETCH',

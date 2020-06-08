@@ -19,16 +19,3 @@ export const clearMapBoxError = () => dispatch => {
     type: errorActionTypes.ERROR_CLEARED_MAPBOX,
   })
 }
-
-export const darkskyError = errorMessage => dispatch => {
-  return dispatch({
-    type: errorActionTypes.ERROR_DARKSKY,
-    payload: errorMessage
-  })
-}
-
-export const clearDarkskyError = () => dispatch => {
-  return dispatch({
-    type: errorActionTypes.ERROR_CLEARED_DARKSKY,
-  })
-}

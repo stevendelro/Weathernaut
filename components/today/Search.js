@@ -33,8 +33,9 @@ function SearchPage(props) {
   const [userInput, setUserInput] = useState('')
   const [showSpinner, setShowSpinner] = useState(false)
   const [displayToast, setDisplayToast] = useState(false)
-  const [err, setErr] = useState('')
+  const [toastMessage, setToastMessage] = useState('')
   const classes = useStyles()
+  
   const {
     // Action Creators
     startLocationFetchByPlaceName,
@@ -69,7 +70,7 @@ function SearchPage(props) {
   useEffect(() => {
     if (error.mapBoxError) {
       setShowSpinner(false)
-      setErr(error.message.casual)
+      setToastMessage(error.message.casual)
       setDisplayToast(true)
     }
 
@@ -124,7 +125,7 @@ function SearchPage(props) {
             </form>
           </Grid>
         )}
-        {toast(displayToast, handleToastClose, err, 'warning')}
+        {toast(displayToast, handleToastClose, toastMessage, 'warning')}
       </Grid>
     </Container>
   )

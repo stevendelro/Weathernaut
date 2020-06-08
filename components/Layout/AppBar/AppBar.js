@@ -11,6 +11,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import InputBase from '@material-ui/core/InputBase'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
+import getShortName from '../../../util/getShortName'
 import toast from '../../toast'
 import useStyles from './useStyles'
 import {
@@ -22,13 +23,12 @@ import {
   getWeatherByCoords,
 } from '../../../store/weather/action'
 import { logLastCity } from '../../../store/history/action'
-import getShortName from '../../../util/getShortName'
 import { clearMapBoxError } from '../../../store/error/action'
 
 function MyAppBar(props) {
   const [userInput, setUserInput] = useState('')
   const [displayToast, setDisplayToast] = useState(false)
-  const [err, setErr] = useState('')
+  const [toastMessage, setToastMessage] = useState('')
   const classes = useStyles()
 
   const {
@@ -61,8 +61,8 @@ function MyAppBar(props) {
       .then(locationData => {
         setUserInput('')
         if (locationData.type !== 'ERROR_MAPBOX') {
-          logLastCity(locationData.placeName)
           slug = getShortName(locationData.placeName.toLowerCase())
+          logLastCity(locationData.placeName)
           startWeatherFetch()
           getWeatherByCoords([locationData.latitude, locationData.longitude])
         }
@@ -75,7 +75,7 @@ function MyAppBar(props) {
 
   useEffect(() => {
     if (error.mapBoxError) {
-      setErr(error.message.casual)
+      setToastMessage(error.message.casual)
       setDisplayToast(true)
     }
   }, [error])
@@ -131,7 +131,7 @@ function MyAppBar(props) {
           </div>
         )}
       </Toolbar>
-      {toast(displayToast, handleToastClose, err, 'error')}
+      {toast(displayToast, handleToastClose, toastMessage, 'error')}
     </AppBar>
   )
 }

@@ -3,10 +3,10 @@ import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
 import MyMap from '../../components/today/MyMap'
+import Next24Chart from '../../components/today/Next24Chart'
 import CurrentTemp from '../../components/today/CurrentTemp'
 import UpcomingWeek from '../../components/today/UpcomingWeek'
 import RightNowTable from '../../components/today/RightNowTable'
-import Next24Chart from '../../components/today/Next24Chart'
 
 const useStyles = makeStyles(theme => ({
   content: {
@@ -30,6 +30,7 @@ const useStyles = makeStyles(theme => ({
 function Today() {
   const classes = useStyles()
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>

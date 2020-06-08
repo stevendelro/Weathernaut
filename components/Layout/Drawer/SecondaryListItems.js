@@ -12,6 +12,7 @@ import MovieFilterIcon from '@material-ui/icons/MovieFilter'
 import LocationCityIcon from '@material-ui/icons/LocationCity'
 import AirportShuttleIcon from '@material-ui/icons/AirportShuttle'
 import getShortName from '../../../util/getShortName'
+import { logLastCity } from '../../../store/history/action'
 import {
   startLocationFetchByPlaceName,
   getLocationByPlaceName,
@@ -20,7 +21,6 @@ import {
   startWeatherFetch,
   getWeatherByCoords,
 } from '../../../store/weather/action'
-import { logLastCity } from '../../../store/history/action'
 
 function SecondaryListItems(props) {
   const {

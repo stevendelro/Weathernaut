@@ -4,7 +4,11 @@ import capitalizeFirstLetter from '../../util/capitalizeFirstLetter'
 const errorInitialState = {
   mapBoxError: false,
   darkSkyError: false,
-  message: {},
+  userInput: '',
+  message: {
+    formal: '',
+    casual: '',
+  },
 }
 
 export default function reducer(state = errorInitialState, action) {
@@ -23,26 +27,6 @@ export default function reducer(state = errorInitialState, action) {
       return {
         ...state,
         mapBoxError: false,
-        userInput: '',
-        message: {
-          formal: '',
-          casual: '',
-        },
-      }
-    case errorActionTypes.ERROR_DARKSKY:
-      return {
-        ...state,
-        darkSkyError: true,
-        message: {
-          formal: action.payload,
-          casual:
-            'Whoops. There was an error retrieving the weather for that location! Lets try again.',
-        },
-      }
-    case errorActionTypes.ERROR_CLEARED_DARKSKY:
-      return {
-        ...state,
-        darkSkyError: false,
         userInput: '',
         message: {
           formal: '',
