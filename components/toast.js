@@ -16,6 +16,7 @@ function toast(
     <Snackbar
       open={onOpen}
       autoHideDuration={autoHideDuration}
+      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       onClose={onClose}>
       <Alert onClose={onClose} variant='standard' severity={severity}>
         {message}

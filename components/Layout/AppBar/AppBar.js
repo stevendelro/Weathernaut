@@ -131,7 +131,7 @@ function MyAppBar(props) {
           </div>
         )}
       </Toolbar>
-      {toast(displayToast, handleToastClose, err, 'warning')}
+      {toast(displayToast, handleToastClose, err, 'error')}
     </AppBar>
   )
 }
