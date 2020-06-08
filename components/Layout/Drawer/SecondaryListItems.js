@@ -30,6 +30,8 @@ function SecondaryListItems(props) {
     startWeatherFetch,
     getWeatherByCoords,
     logLastCity,
+    // State
+    noWeatherData,
     // From parent
     closeDrawer,
   } = props
@@ -48,7 +50,9 @@ function SecondaryListItems(props) {
         getWeatherByCoords([locationData.latitude, locationData.longitude])
       })
       .then(() => {
-        Router.push('/[location]/home', `/${slug}/home`)
+        if (!noWeatherData) {
+          Router.push('/[location]/home', `/${slug}/home`)
+        }
       })
   }
 
@@ -110,4 +114,8 @@ const mapDispatchToProps = dispatch => {
     logLastCity: bindActionCreators(logLastCity, dispatch),
   }
 }
-export default connect(null, mapDispatchToProps)(SecondaryListItems)
+const mapStateToProps = ({ weather }) => {
+  const { noWeatherData } = weather
+  return { noWeatherData }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SecondaryListItems)

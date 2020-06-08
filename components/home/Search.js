@@ -48,6 +48,7 @@ function SearchPage(props) {
     latitude,
     longitude,
     noWeatherData,
+    weatherLoading,
   } = props
 
   const submitHandler = async event => {
@@ -72,10 +73,14 @@ function SearchPage(props) {
       setDisplaySnackBar(true)
     }
 
+    if (weatherLoading) {
+      setShowSpinner(true)
+    }
+
     if (!noWeatherData) {
       Router.push('/[location]/home', `/${urlSlug}/home`)
     }
-  }, [error, noWeatherData])
+  }, [error, noWeatherData, weatherLoading])
 
   const handleSnackBarClose = () => {
     setDisplaySnackBar(false)
@@ -142,7 +147,7 @@ const mapDispatchToProps = dispatch => {
 }
 function mapStateToProps({ location, weather, error }) {
   const { urlSlug, latitude, longitude } = location
-  const { noWeatherData } = weather
-  return { urlSlug, latitude, longitude, noWeatherData, error }
+  const { noWeatherData, weatherLoading } = weather
+  return { urlSlug, latitude, longitude, noWeatherData, error, weatherLoading }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPage)
