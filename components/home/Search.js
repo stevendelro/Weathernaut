@@ -10,6 +10,7 @@ import OutlinedInput from '@material-ui/core/OutlinedInput'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import { makeStyles } from '@material-ui/core/styles'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import snackBar from '../snackBar'
 
 import {
   startLocationFetchByPlaceName,
@@ -19,6 +20,7 @@ import {
   startWeatherFetch,
   getWeatherByCoords,
 } from '../../store/weather/action'
+import { clearMapBoxError } from '../../store/error/action'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -30,6 +32,8 @@ const useStyles = makeStyles(theme => ({
 function SearchPage(props) {
   const [userInput, setUserInput] = useState('')
   const [showSpinner, setShowSpinner] = useState(false)
+  const [displaySnackBar, setDisplaySnackBar] = useState(false)
+  const [err, setErr ] = useState('')
   const classes = useStyles()
   const {
     // Action Creators
@@ -37,7 +41,9 @@ function SearchPage(props) {
     getLocationByPlaceName,
     startWeatherFetch,
     getWeatherByCoords,
+    clearMapBoxError,
     // State
+    error,
     urlSlug,
     latitude,
     longitude,
@@ -48,7 +54,8 @@ function SearchPage(props) {
     event.preventDefault()
     setShowSpinner(true)
     startLocationFetchByPlaceName()
-    await getLocationByPlaceName(userInput)
+    const response = await getLocationByPlaceName(userInput)
+    setUserInput('')
   }
 
   useEffect(() => {
@@ -59,10 +66,21 @@ function SearchPage(props) {
   }, [latitude, longitude])
 
   useEffect(() => {
+    if (error.mapBoxError) {
+      setShowSpinner(false)
+      setErr(error.message.casual)
+      setDisplaySnackBar(true)
+    }
+
     if (!noWeatherData) {
       Router.push('/[location]/home', `/${urlSlug}/home`)
     }
-  }, [noWeatherData])
+  }, [error, noWeatherData])
+
+  const handleSnackBarClose = () => {
+    setDisplaySnackBar(false)
+    clearMapBoxError()
+  }
 
   return (
     <Container maxWidth='lg' className={classes.container}>
@@ -101,6 +119,7 @@ function SearchPage(props) {
             </form>
           </Grid>
         )}
+        {snackBar(displaySnackBar, handleSnackBarClose, err, 'warning')}
       </Grid>
     </Container>
   )
@@ -118,11 +137,12 @@ const mapDispatchToProps = dispatch => {
     ),
     startWeatherFetch: bindActionCreators(startWeatherFetch, dispatch),
     getWeatherByCoords: bindActionCreators(getWeatherByCoords, dispatch),
+    clearMapBoxError: bindActionCreators(clearMapBoxError, dispatch),
   }
 }
-function mapStateToProps({ location, weather }) {
+function mapStateToProps({ location, weather, error }) {
   const { urlSlug, latitude, longitude } = location
   const { noWeatherData } = weather
-  return { urlSlug, latitude, longitude, noWeatherData }
+  return { urlSlug, latitude, longitude, noWeatherData, error }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPage)

@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Router from 'next/router'
@@ -11,6 +11,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import InputBase from '@material-ui/core/InputBase'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
+import snackBar from '../../snackBar'
 import useStyles from './useStyles'
 import {
   startLocationFetchByPlaceName,
@@ -22,9 +23,12 @@ import {
 } from '../../../store/weather/action'
 import { logLastCity } from '../../../store/history/action'
 import getShortName from '../../../util/getShortName'
+import { clearMapBoxError } from '../../../store/error/action'
 
 function MyAppBar(props) {
   const [userInput, setUserInput] = useState('')
+  const [displaySnackBar, setDisplaySnackBar] = useState(false)
+  const [err, setErr ] = useState('')
   const classes = useStyles()
 
   const {
@@ -33,10 +37,12 @@ function MyAppBar(props) {
     getLocationByPlaceName,
     startWeatherFetch,
     getWeatherByCoords,
+    clearMapBoxError,
     logLastCity,
     // State
     noWeatherData,
     deniedGeolocation,
+    error,
     // From parent
     openDrawer,
     setOpenDrawer,
@@ -53,15 +59,32 @@ function MyAppBar(props) {
     startLocationFetchByPlaceName()
     await getLocationByPlaceName(userInput)
       .then(locationData => {
-        logLastCity(locationData.placeName)
-        slug = getShortName(locationData.placeName.toLowerCase())
         setUserInput('')
-        startWeatherFetch()
-        getWeatherByCoords([locationData.latitude, locationData.longitude])
+        if (locationData.type !== 'ERROR_MAPBOX') {
+          logLastCity(locationData.placeName)
+          slug = getShortName(locationData.placeName.toLowerCase())
+          startWeatherFetch()
+          getWeatherByCoords([locationData.latitude, locationData.longitude])
+        }
       })
       .then(() => {
-        Router.push('/[location]/home', `/${slug}/home`)
+        slug ? Router.push('/[location]/home', `/${slug}/home`) : null
+
       })
+      .catch(error => console.log('Invalid Search Term: ', error))
+  }
+
+  useEffect(() => {
+    if (error.mapBoxError) {
+      setErr(error.message.casual)
+      setDisplaySnackBar(true)
+    }
+  }, [error])
+
+
+  const handleSnackBarClose = () => {
+    setDisplaySnackBar(false)
+    clearMapBoxError()
   }
 
   return (
@@ -110,6 +133,7 @@ function MyAppBar(props) {
           </div>
         )}
       </Toolbar>
+      {snackBar(displaySnackBar, handleSnackBarClose, err, 'warning' )}
     </AppBar>
   )
 }
@@ -127,11 +151,12 @@ const mapDispatchToProps = dispatch => {
     startWeatherFetch: bindActionCreators(startWeatherFetch, dispatch),
     getWeatherByCoords: bindActionCreators(getWeatherByCoords, dispatch),
     logLastCity: bindActionCreators(logLastCity, dispatch),
+    clearMapBoxError: bindActionCreators(clearMapBoxError, dispatch),
   }
 }
-function mapStateToProps({ location, weather }) {
+function mapStateToProps({ location, weather, error }) {
   const { deniedGeolocation } = location
   const { noWeatherData } = weather
-  return { noWeatherData, deniedGeolocation }
+  return { noWeatherData, deniedGeolocation, error }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MyAppBar)

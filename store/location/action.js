@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { mapBoxError } from '../error/action'
 
 export const locationActions = {
   START_LOCATION_FETCH_BY_COORDS: 'START_LOCATION_FETCH_BY_COORDS',
@@ -31,7 +32,7 @@ export const getLocationByCoords = coords => async dispatch => {
       })
       return data
     })
-    .catch(error => console.log('getLocationByCoords ERROR', error.message))
+    .catch(error => mapBoxError(coords, error.message))
 
   if (res) {
     return res
@@ -49,7 +50,7 @@ export const getLocationByPlaceName = placeName => async dispatch => {
       })
       return data
     })
-    .catch(error => console.log('getLocationByPlaceName ERROR', error.message))
+    .catch(error => mapBoxError(placeName, error.message)(dispatch))
 
   if (res) {
     return res

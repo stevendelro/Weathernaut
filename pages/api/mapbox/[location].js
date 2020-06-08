@@ -9,6 +9,9 @@ export default async (req, res) => {
   } else {
     try {
       const response = await axios.get(urlComplete)
+      if (response.data.features === []) {
+        res.status(e.status || 400).json({ message: 'No data available for this location.' })
+      }
       const long = response.data.features[0].center[0]
       const lat = response.data.features[0].center[1]
       const placeName = response.data.features[0].place_name
@@ -18,8 +21,8 @@ export default async (req, res) => {
         longitude: long,
         placeName,
       })
-    } catch (e) {
-      console.error(e)
+    } catch (error) {
+      console.error('MAPBOX API ERROR: ', error)
       res.status(e.status || 400).json({ message: 'Api error' })
     }
   }
