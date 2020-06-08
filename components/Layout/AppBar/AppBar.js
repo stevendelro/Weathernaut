@@ -11,7 +11,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import InputBase from '@material-ui/core/InputBase'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
-import snackBar from '../../snackBar'
+import toast from '../../toast'
 import useStyles from './useStyles'
 import {
   startLocationFetchByPlaceName,
@@ -27,7 +27,7 @@ import { clearMapBoxError } from '../../../store/error/action'
 
 function MyAppBar(props) {
   const [userInput, setUserInput] = useState('')
-  const [displaySnackBar, setDisplaySnackBar] = useState(false)
+  const [displayToast, setDisplayToast] = useState(false)
   const [err, setErr ] = useState('')
   const classes = useStyles()
 
@@ -77,13 +77,13 @@ function MyAppBar(props) {
   useEffect(() => {
     if (error.mapBoxError) {
       setErr(error.message.casual)
-      setDisplaySnackBar(true)
+      setDisplayToast(true)
     }
   }, [error])
 
 
-  const handleSnackBarClose = () => {
-    setDisplaySnackBar(false)
+  const handleToastClose = () => {
+    setDisplayToast(false)
     clearMapBoxError()
   }
 
@@ -133,7 +133,7 @@ function MyAppBar(props) {
           </div>
         )}
       </Toolbar>
-      {snackBar(displaySnackBar, handleSnackBarClose, err, 'warning' )}
+      {toast(displayToast, handleToastClose, err, 'warning' )}
     </AppBar>
   )
 }

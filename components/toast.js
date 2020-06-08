@@ -5,7 +5,7 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant='filled' {...props} />
 }
 
-function snackBar(
+function toast(
   onOpen,
   onClose,
   message,
@@ -24,4 +24,4 @@ function snackBar(
   )
 }
 
-export default snackBar
+export default toast

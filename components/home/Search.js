@@ -10,7 +10,7 @@ import OutlinedInput from '@material-ui/core/OutlinedInput'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import { makeStyles } from '@material-ui/core/styles'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import snackBar from '../snackBar'
+import toast from '../toast'
 
 import {
   startLocationFetchByPlaceName,
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 function SearchPage(props) {
   const [userInput, setUserInput] = useState('')
   const [showSpinner, setShowSpinner] = useState(false)
-  const [displaySnackBar, setDisplaySnackBar] = useState(false)
+  const [displayToast, setDisplayToast] = useState(false)
   const [err, setErr ] = useState('')
   const classes = useStyles()
   const {
@@ -55,7 +55,7 @@ function SearchPage(props) {
     event.preventDefault()
     setShowSpinner(true)
     startLocationFetchByPlaceName()
-    const response = await getLocationByPlaceName(userInput)
+    await getLocationByPlaceName(userInput)
     setUserInput('')
   }
 
@@ -70,7 +70,7 @@ function SearchPage(props) {
     if (error.mapBoxError) {
       setShowSpinner(false)
       setErr(error.message.casual)
-      setDisplaySnackBar(true)
+      setDisplayToast(true)
     }
 
     if (weatherLoading) {
@@ -82,8 +82,8 @@ function SearchPage(props) {
     }
   }, [error, noWeatherData, weatherLoading])
 
-  const handleSnackBarClose = () => {
-    setDisplaySnackBar(false)
+  const handleToastClose = () => {
+    setDisplayToast(false)
     clearMapBoxError()
   }
 
@@ -124,7 +124,7 @@ function SearchPage(props) {
             </form>
           </Grid>
         )}
-        {snackBar(displaySnackBar, handleSnackBarClose, err, 'warning')}
+        {toast(displayToast, handleToastClose, err, 'warning')}
       </Grid>
     </Container>
   )
