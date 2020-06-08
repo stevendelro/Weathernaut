@@ -71,7 +71,7 @@ const Index = props => {
           coords.latitude,
           coords.longitude,
         ])
-        Router.push('/home/[location]', `/home/${getShortName(placeName)}`)
+        Router.push('/[location]/home', `/${getShortName(placeName)}/home`)
       })
       .catch(() => {
         denyGeo()

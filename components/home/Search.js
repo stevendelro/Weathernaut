@@ -60,7 +60,7 @@ function SearchPage(props) {
 
   useEffect(() => {
     if (!noWeatherData) {
-      Router.push('/home/[location]', `/home/${urlSlug}`)
+      Router.push('/[location]/home', `/${urlSlug}/home`)
     }
   }, [noWeatherData])
 

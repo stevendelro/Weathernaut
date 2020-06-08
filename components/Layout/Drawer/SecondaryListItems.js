@@ -48,7 +48,7 @@ function SecondaryListItems(props) {
         getWeatherByCoords([locationData.latitude, locationData.longitude])
       })
       .then(() => {
-        Router.push('/home/[location]', `/home/${slug}`)
+        Router.push('/[location]/home', `/${slug}/home`)
       })
   }
 

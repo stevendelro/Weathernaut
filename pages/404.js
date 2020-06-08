@@ -32,7 +32,7 @@ function NotFoundPage({ placeName }) {
   const goHome = place => event => {
     event.preventDefault()
     place
-      ? Router.push(`/home/[location]`, `/home/${getShortName(place)}`)
+      ? Router.push(`/[location]/home`, `/${getShortName(place)}/home`)
       : Router.push('/')
   }
   return (

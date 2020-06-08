@@ -36,8 +36,8 @@ const MainListItems = props => {
 
     lowerCasePlace
       ? Router.push(
-          `/${page}/[location]`,
-          `/${page}/${getShortName(lowerCasePlace)}`
+          `/[location]/${page}`,
+          `/${getShortName(lowerCasePlace)}/${page}`
         )
       : Router.push(`/${page}`)
     setAppBarTitle(capitalizeFirstLetter(page))
