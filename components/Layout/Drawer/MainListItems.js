@@ -51,7 +51,7 @@ const MainListItems = props => {
         component='a'
         onClick={event => {
           if (noWeatherData) {
-            closeDrawerAndShowSearch()
+            closeDrawerAndShowSearch(event)
           } else {
             closeDrawerAndShowPage('home', placeName)(event)
           }
@@ -68,7 +68,7 @@ const MainListItems = props => {
         component='a'
         onClick={event => {
           if (noWeatherData) {
-            closeDrawerAndShowSearch()
+            closeDrawerAndShowSearch(event)
           } else {
             closeDrawerAndShowPage('hourly', placeName)(event)
           }
@@ -85,7 +85,7 @@ const MainListItems = props => {
         component='a'
         onClick={event => {
           if (noWeatherData) {
-            closeDrawerAndShowSearch()
+            closeDrawerAndShowSearch(event)
           } else {
             closeDrawerAndShowPage('daily', placeName)(event)
           }
@@ -102,7 +102,7 @@ const MainListItems = props => {
         component='a'
         onClick={() => {
           if (noWeatherData) {
-            closeDrawerAndShowSearch()
+            closeDrawerAndShowSearch(event)
           } else {
             closeDrawer()
             closeDrawerAndShowPage('history', null)(event)
