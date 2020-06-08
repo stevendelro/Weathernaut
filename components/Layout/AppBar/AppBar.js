@@ -28,7 +28,7 @@ import { clearMapBoxError } from '../../../store/error/action'
 function MyAppBar(props) {
   const [userInput, setUserInput] = useState('')
   const [displayToast, setDisplayToast] = useState(false)
-  const [err, setErr ] = useState('')
+  const [err, setErr] = useState('')
   const classes = useStyles()
 
   const {
@@ -68,8 +68,7 @@ function MyAppBar(props) {
         }
       })
       .then(() => {
-        slug ? Router.push('/[location]/home', `/${slug}/home`) : null
-
+        slug ? Router.push('/[location]/today', `/${slug}/today`) : null
       })
       .catch(error => console.log('Invalid Search Term: ', error))
   }
@@ -80,7 +79,6 @@ function MyAppBar(props) {
       setDisplayToast(true)
     }
   }, [error])
-
 
   const handleToastClose = () => {
     setDisplayToast(false)
@@ -133,7 +131,7 @@ function MyAppBar(props) {
           </div>
         )}
       </Toolbar>
-      {toast(displayToast, handleToastClose, err, 'warning' )}
+      {toast(displayToast, handleToastClose, err, 'warning')}
     </AppBar>
   )
 }

@@ -29,7 +29,7 @@ function MyApp(props) {
   const dateToday = moment().format('dddd, MMMM Do')
   const { Component, pageProps } = props
   const [openDrawer, setOpenDrawer] = useState(false)
-  const [appBarTitle, setAppBarTitle] = useState(`Weathernaut - ${dateToday}`)
+  const [appBarTitle, setAppBarTitle] = useState(dateToday)
   const classes = useStyles()
 
   useEffect(() => {

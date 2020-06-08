@@ -10,7 +10,7 @@ import { logLastCity } from '../store/history/action'
 import { getWeatherByCoords } from '../store/weather/action'
 import { getLocationByCoords, denyGeo } from '../store/location/action'
 import getShortName from '../util/getShortName'
-import Search from '../components/home/Search'
+import Search from '../components/today/Search'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -71,7 +71,7 @@ const Index = props => {
           coords.latitude,
           coords.longitude,
         ])
-        Router.push('/[location]/home', `/${getShortName(placeName)}/home`)
+        Router.push('/[location]/today', `/${getShortName(placeName)}/today`)
       })
       .catch(() => {
         denyGeo()

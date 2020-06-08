@@ -51,7 +51,7 @@ function SecondaryListItems(props) {
       })
       .then(() => {
         if (!noWeatherData) {
-          Router.push('/[location]/home', `/${slug}/home`)
+          Router.push('/[location]/today', `/${slug}/today`)
         }
       })
   }

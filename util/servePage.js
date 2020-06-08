@@ -1,23 +1,23 @@
 import { useRouter } from 'next/router'
 
-const servePage = (pageName) => {
+const servePage = pageName => {
   const router = useRouter()
   switch (pageName) {
-    case 'home':
+    case 'today':
       router.push('/')
-      break;
+      break
     case 'daily':
       router.push('/daily')
-      break;
+      break
     case 'hourly':
-      router.push('/hourly', )
-      break;
+      router.push('/hourly')
+      break
     case 'history':
       router.push('/history')
-      break;
+      break
     case 'search':
       router.push('/search')
-      break;
+      break
     default:
       router.push('/not-found')
   }

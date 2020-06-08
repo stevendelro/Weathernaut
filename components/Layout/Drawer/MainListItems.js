@@ -44,25 +44,25 @@ const MainListItems = props => {
         )
       : Router.push(`/${page}`)
 
-      switch (page) {
-        case 'hourly':
-          setAppBarTitle(`${dateToday} - By The Hour`)
-          break;
-        case 'daily':
-          setAppBarTitle(`${startOfWeek} → ${endOfWeek}`)
-          break;
-        case 'home':
-          setAppBarTitle(dateToday)
-          break;
+    switch (page) {
+      case 'hourly':
+        setAppBarTitle(`${dateToday} - By The Hour`)
+        break
+      case 'daily':
+        setAppBarTitle(`${startOfWeek} → ${endOfWeek}`)
+        break
+      case 'today':
+        setAppBarTitle(dateToday)
+        break
 
-        default:
-          break;
-      }
+      default:
+        break
+    }
   }
 
   return (
     <>
-      {/* Home */}
+      {/* Today */}
       <ListItem
         button
         component='a'
@@ -70,13 +70,13 @@ const MainListItems = props => {
           if (noWeatherData) {
             closeDrawerAndShowSearch(event)
           } else {
-            closeDrawerAndShowPage('home', placeName)(event)
+            closeDrawerAndShowPage('today', placeName)(event)
           }
         }}>
         <ListItemIcon>
           <LocationOnIcon />
         </ListItemIcon>
-        <ListItemText primary='Home' />
+        <ListItemText primary='Today' />
       </ListItem>
 
       {/* Hourly */}

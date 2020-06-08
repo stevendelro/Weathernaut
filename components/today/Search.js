@@ -10,6 +10,7 @@ import OutlinedInput from '@material-ui/core/OutlinedInput'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import { makeStyles } from '@material-ui/core/styles'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import { clearMapBoxError } from '../../store/error/action'
 import toast from '../toast'
 
 import {
@@ -20,7 +21,6 @@ import {
   startWeatherFetch,
   getWeatherByCoords,
 } from '../../store/weather/action'
-import { clearMapBoxError } from '../../store/error/action'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -33,7 +33,7 @@ function SearchPage(props) {
   const [userInput, setUserInput] = useState('')
   const [showSpinner, setShowSpinner] = useState(false)
   const [displayToast, setDisplayToast] = useState(false)
-  const [err, setErr ] = useState('')
+  const [err, setErr] = useState('')
   const classes = useStyles()
   const {
     // Action Creators
@@ -78,7 +78,7 @@ function SearchPage(props) {
     }
 
     if (!noWeatherData) {
-      Router.push('/[location]/home', `/${urlSlug}/home`)
+      Router.push('/[location]/today', `/${urlSlug}/today`)
     }
   }, [error, noWeatherData, weatherLoading])
 

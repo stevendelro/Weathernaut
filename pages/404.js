@@ -29,10 +29,10 @@ const useStyles = makeStyles(theme => ({
 function NotFoundPage({ placeName }) {
   const classes = useStyles()
 
-  const goHome = place => event => {
+  const returnTodayPage = place => event => {
     event.preventDefault()
     place
-      ? Router.push(`/[location]/home`, `/${getShortName(place)}/home`)
+      ? Router.push(`/[location]/today`, `/${getShortName(place)}/today`)
       : Router.push('/')
   }
   return (
@@ -49,7 +49,7 @@ function NotFoundPage({ placeName }) {
           <Button
             as='a'
             color='primary'
-            onClick={event => goHome(placeName)(event)}>
+            onClick={event => returnTodayPage(placeName)(event)}>
             <HomeOutlinedIcon color='disabled' fontSize='large' />
           </Button>
         </Grid>
