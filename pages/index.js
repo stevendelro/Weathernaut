@@ -1,22 +1,44 @@
 import { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import Router from 'next/router'
 import { makeStyles } from '@material-ui/core/styles'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container'
 import { logLastCity } from '../store/history/action'
 import { getWeatherByCoords } from '../store/weather/action'
 import { getLocationByCoords, denyGeo } from '../store/location/action'
+import getShortName from '../util/getShortName'
 import Search from '../components/home/Search'
+
 const useStyles = makeStyles(theme => ({
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
-  }
+  },
 }))
 
 const Index = props => {
   const classes = useStyles()
   const [renderedComponent, setRenderedComponent] = useState(<></>)
+
+  const spinner = (
+    <Grid
+      container
+      direction='row'
+      justify='center'
+      alignItems='center'
+      spacing={3}>
+      <Grid item>
+        <CircularProgress
+          color='secondary'
+          style={{ height: '100px', width: '100px' }}
+          justify='center'
+        />
+      </Grid>
+    </Grid>
+  )
 
   const {
     // Action creators
@@ -42,9 +64,14 @@ const Index = props => {
   // Receive coordinates from geolocation. If denied, display simple search page.
   useEffect(() => {
     getPosition()
-      .then(({ coords }) => {
-        getWeatherByCoords([coords.latitude, coords.longitude])
-        getLocationByCoords([coords.latitude, coords.longitude])
+      .then(async ({ coords }) => {
+        setRenderedComponent(spinner)
+        await getWeatherByCoords([coords.latitude, coords.longitude])
+        const { placeName } = await getLocationByCoords([
+          coords.latitude,
+          coords.longitude,
+        ])
+        Router.push('/home/[location]', `/home/${getShortName(placeName)}`)
       })
       .catch(() => {
         denyGeo()
