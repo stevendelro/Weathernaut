@@ -9,7 +9,8 @@ import serveIcon from '../../public/icons/index'
 
 function UpcomingWeek({ weather }) {
   const [chartData, setChartData] = useState([])
-
+  if (weather.noWeatherData) return null
+  
   useEffect(() => {
     weather.daily.data.forEach(day => {
       setChartData(prev => [

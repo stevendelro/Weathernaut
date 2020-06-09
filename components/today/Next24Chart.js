@@ -18,6 +18,8 @@ const lineStrokeHigh= '#FFBC00'
 function Next24Chart({ weather }) {
   const [hourlyTemps, setHourlyTemps] = useState([])
 
+  if (weather.noWeatherData) return null
+
   useEffect(() => {
     const next24hours = weather.hourly.data.slice(0, 25)
     next24hours.forEach(hour => {

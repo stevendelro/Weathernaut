@@ -12,6 +12,7 @@ const useStyles = makeStyles({
 })
 
 function CurrentTemp({ weather }) {
+  if (weather.noWeatherData) return null
   const classes = useStyles()
   return (
     <Grid container direction='column' justify='center' alignItems='center'>

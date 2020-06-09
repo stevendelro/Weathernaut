@@ -7,7 +7,9 @@ import TableContainer from '@material-ui/core/TableContainer'
 import Title from '../Title'
 import getCardinalDirection from '../../util/getCardinalDirection'
 
-function RightNowTable({ currently }) {
+function RightNowTable({ currently, noWeatherData }) {
+  if (noWeatherData) return null
+  
   const percentProbability = `${currently.precipProbability.toFixed(0)}%`
   const humidity = `${(currently.humidity * 100).toFixed(0)}%`
   const pressure = `${(currently.pressure * 0.0295301).toFixed(2)} in`
@@ -78,7 +80,7 @@ function RightNowTable({ currently }) {
 }
 
 const mapStateToProps = ({ weather }) => {
-  const { currently } = weather
-  return { currently }
+  const { currently, noWeatherData } = weather
+  return { currently, noWeatherData }
 }
 export default connect(mapStateToProps, null)(RightNowTable)
