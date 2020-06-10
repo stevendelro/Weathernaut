@@ -49,9 +49,13 @@ function DailyTable({ weather, location }) {
     })
   }, [weather.daily.data])
 
-  if (chartData.length === 8) {
+  if (chartData.length > 8) {
     chartData.shift()
   }
+  if (chartData.length === 8) {
+    chartData[0].weekday = 'TODAY'
+  }
+
   return (
     <>
       <ExpansionPanel>
