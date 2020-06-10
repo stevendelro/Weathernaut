@@ -1,20 +1,24 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
+import { useStore } from "react-redux";
 import moment from 'moment'
 import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider, makeStyles } from '@material-ui/core/styles'
+import LinearProgress from '@material-ui/core/LinearProgress';
 import AppBar from '../components/Layout/AppBar/AppBar'
 import Drawer from '../components/Layout/Drawer/Drawer'
 import NameStamp from '../components/NameStamp'
 import theme from '../styles/theme/theme'
 import { wrapper } from '../store/store'
+import { PersistGate } from 'redux-persist/integration/react'
+
 
 const useStyles = makeStyles(() => ({
   content: {
     width: '100%',
-    marginTop: '84px',
+    paddingTop: '84px',
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
@@ -30,6 +34,7 @@ function MyApp(props) {
   const { Component, pageProps } = props
   const [openDrawer, setOpenDrawer] = useState(false)
   const [appBarTitle, setAppBarTitle] = useState(dateToday)
+  const store = useStore((state) => state);
   const classes = useStyles()
 
   useEffect(() => {
@@ -52,32 +57,36 @@ function MyApp(props) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <div style={{ display: 'flex ' }}>
-          <AppBar
-            openDrawer={openDrawer}
-            setOpenDrawer={setOpenDrawer}
-            appBarTitle={appBarTitle}
-          />
-          <Drawer
-            setAppBarTitle={setAppBarTitle}
-            openDrawer={openDrawer}
-            setOpenDrawer={setOpenDrawer}
-          />
-          <main className={classes.content}>
-            <Container maxWidth='lg'>
-              <Component {...pageProps} />
-              <Grid
-                container
-                direction='column'
-                justify='center'
-                alignItems='center'>
-                <Grid className={classes.nameStamp} item>
-                  <NameStamp />
+        <PersistGate
+          persistor={store.__persistor}
+          loading={<LinearProgress />}>
+          <div style={{ display: 'flex ' }}>
+            <AppBar
+              openDrawer={openDrawer}
+              setOpenDrawer={setOpenDrawer}
+              appBarTitle={appBarTitle}
+            />
+            <Drawer
+              setAppBarTitle={setAppBarTitle}
+              openDrawer={openDrawer}
+              setOpenDrawer={setOpenDrawer}
+            />
+            <main className={classes.content}>
+              <Container maxWidth='lg'>
+                <Component {...pageProps} />
+                <Grid
+                  container
+                  direction='column'
+                  justify='center'
+                  alignItems='center'>
+                  <Grid className={classes.nameStamp} item>
+                    <NameStamp />
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Container>
-          </main>
-        </div>
+              </Container>
+            </main>
+          </div>
+        </PersistGate>
       </ThemeProvider>
     </>
   )
