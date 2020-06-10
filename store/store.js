@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
+import sessionStorage from 'redux-persist/lib/storage/session'
 import { HYDRATE, createWrapper } from 'next-redux-wrapper'
 import thunkMiddleware from 'redux-thunk'
 
@@ -29,7 +30,7 @@ const makeStore = ({ isServer }) => {
   } else {
     //If it's on client side, create a store with a persistability feature
     const { persistStore, persistReducer } = require('redux-persist')
-    const storage = require('redux-persist/lib/storage').default
+    const storage = sessionStorage
 
     const persistConfig = {
       key: 'nextjs',
@@ -49,26 +50,3 @@ const makeStore = ({ isServer }) => {
 
 // export an assembled wrapper
 export const wrapper = createWrapper(makeStore)
-
-// const reducer = (state, action) => {
-//   if (action.type === HYDRATE) {
-//     const nextState = {
-//       ...state, // use previous state
-//       ...action.payload, // apply delta from hydration
-//     }
-//     // preserve state on client side navigation
-//     if (state.weather) nextState.weather = state.weather
-//     if (state.location) nextState.location = state.location
-//     if (state.history) nextState.history = state.history
-//     if (state.error) nextState.error = state.error
-//     return nextState
-//   } else {
-//     return combinedReducer(state, action)
-//   }
-// }
-
-// const initStore = () => {
-//   return createStore(reducer, bindMiddleware([thunkMiddleware]))
-// }
-
-// export const wrapper = createWrapper(initStore)
