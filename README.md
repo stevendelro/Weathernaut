@@ -28,6 +28,7 @@ Version 3: [Weathernaut](https://weathernaut.now.sh)
 
 Version 2: [umbrellapp](https://umbrellapp.now.sh/)
 * I wanted to learn how to use React Hooks, so I remade the app.
+* I learned how to interact with the browser's Geolocation API and the fun that comes with approving or denying permissions.
 * After searching for a solid React styling library to make the UI, I settled on Material UI React. I love their documentation.
 * I learned the basics of useEffect, useState, and useReducer.
 
