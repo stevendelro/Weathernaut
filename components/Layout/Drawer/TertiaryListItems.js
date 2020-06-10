@@ -12,7 +12,7 @@ export default function TertiaryListItems () {
         button
         onClick={() =>
           (window.location.href =
-            'https://github.com/stevendelro/react-weather-dashboard')
+            'https://github.com/stevendelro/nextjs-redux-weather/')
         }>
         <ListItemIcon>
           <GitHubIcon />
