@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import sessionStorage from 'redux-persist/lib/storage/session'
-import { HYDRATE, createWrapper } from 'next-redux-wrapper'
+import { createWrapper } from 'next-redux-wrapper'
 import thunkMiddleware from 'redux-thunk'
 
 import error from './error/reducer'
@@ -34,7 +34,7 @@ const makeStore = ({ isServer }) => {
 
     const persistConfig = {
       key: 'nextjs',
-      whitelist: ['weather', 'location', 'history'], // make sure it does not clash with server keys
+      whitelist: ['weather', 'location', 'history'],
       storage,
     }
 
