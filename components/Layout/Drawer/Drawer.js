@@ -30,7 +30,8 @@ function MyDrawer({
           !openDrawer && classes.drawerPaperClose
         ),
       }}
-      open={openDrawer}>
+      open={openDrawer}
+      ModalProps={{ onBackdropClick: handleDrawerClose}}>
       <div className={classes.toolbarIcon}>
         <IconButton onClick={handleDrawerClose}>
           <ChevronLeftIcon />
