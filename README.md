@@ -6,7 +6,7 @@
 
 ### Why build this app?
 
-This is the third and final iteration of my React weather dashboard. Although the UI/UX is very similar to v2.0, the entire app was rewritten to utilize [NextJS] (https://nextjs.org/) and all the greatness that comes with server side rendering.
+This is the third and final iteration of my React weather dashboard. Although the UI/UX is very similar to v2.0, the entire app was rewritten to utilize [NextJS] (https://nextjs.org/) and it's greatness.
 
 The main point of rebuilding this app was to refine the initial codebase into something that I would want an employer to see.
 
@@ -20,10 +20,10 @@ Version 3: [Weathernaut](https://weathernaut.now.sh)
 * New name! "Umbrallapp" sounded like vomit. "Weathernaut" has a nice quirky ring to it.
 * All source code has been completely refactored to be modular, easy to read, well commented, and very maintainable.
 * Dynamic page based routing with NextJS.
-* Replaced the large useReducer hook with by wapping the entire up with a Redux wrapper.
+* Replaced the large useReducer hook with by wapping the entire up with a [Redux wrapper](https://github.com/kirill-konshin/next-redux-wrapper).
 * Implementation of serverless functions to protect API keys.
-* Material-UI custom theming makes changing the look and feel of the app as simple as changing two variables.
-* State will persist (per session) on page reload with redux-persist.
+* [Material-UI custom theming](https://material-ui.com/customization/theming/) makes changing the look and feel of the app as simple as changing two variables.
+* State will persist (per session) on page reload with [redux-persist](https://github.com/fazlulkarimweb/with-next-redux-wrapper-redux-persist).
 * Many small improvements with the UI/UX.
 
 Version 2: [umbrellapp](https://umbrellapp.now.sh/)
