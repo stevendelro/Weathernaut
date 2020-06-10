@@ -33,7 +33,7 @@ const makeStore = ({ isServer }) => {
 
     const persistConfig = {
       key: 'nextjs',
-      whitelist: ['weather', 'location', 'history', 'error'], // make sure it does not clash with server keys
+      whitelist: ['weather', 'location', 'history'], // make sure it does not clash with server keys
       storage,
     }
 
