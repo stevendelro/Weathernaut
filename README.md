@@ -22,7 +22,7 @@ Weathernaut is the *third* iteration of a weather app that I made back in March 
 >In this first section, I'll be discussing the two iterations before Weathernaut, so if you're looking for Weathernaut-specific information, use the table of contents above to get where ever you want to be.
 
 ### Iteration 1 redux-weather
-###### [LIVE DEMO](https://redux-weather.now.sh/) • [SOURCE CODE](https://github.com/stevendelro/redux-weather)
+###### [LIVE DEMO](https://redux-weather.now.sh/) | [SOURCE CODE](https://github.com/stevendelro/redux-weather)
 
 When the pandemic hit America, I decided to hit the keyboard. It had been a few months since I even attempted to code anything, so I was pretty rusty. The first order of business was to make an app that grabs data from an external API. So of course, a weather app fit the bill perfectly.
 
@@ -62,7 +62,7 @@ I even made a gif:
 
 
 ### Iteration 2 Umbrellapp
-###### [LIVE DEMO](https://umbrellapp.now.sh/) • [SOURCE CODE](https://github.com/stevendelro/react-weather-dashboard)
+###### [LIVE DEMO](https://umbrellapp.now.sh/) | [SOURCE CODE](https://github.com/stevendelro/react-weather-dashboard)
 
 Sweet. So I got all caught up with my old React skills. The next order of business was to wrap my head around React Hooks.
 
@@ -70,7 +70,7 @@ Sweet. So I got all caught up with my old React skills. The next order of busine
 
 Initially, I thought that I should make a completely different type of app.
 
-I mean, I was so tired of looking at the same code. But, I restrained myself. I needed to make things easier for me, not more difficult—regardless if the difficult route would ultimately bear more fruits of knowledge. The goal right now wasn't knowledge accumulation. I need to keep myself focused on the very specific goal of *producing* finished work.
+I mean, I was so tired of looking at the same code. But, I restrained myself. I needed to make things easier for me, not more difficult--regardless if the difficult route would ultimately bear more fruits of knowledge. The goal right now wasn't knowledge accumulation. I need to keep myself focused on the very specific goal of *producing* finished work.
 
 So, at a bare minimum, what could take this weather app to the next level?
 
@@ -90,7 +90,7 @@ What resulted from that was, Umbrellapp:
 ![](https://arbletur.sirv.com/gifs/umbrellapp15fps.gif)
 
 ### Iteration 3 Weathernaut
-###### [LIVE DEMO](https://weathernaut.now.sh/) • [SOURCE CODE](https://github.com/stevendelro/Weathernaut)
+###### [LIVE DEMO](https://weathernaut.now.sh/) | [SOURCE CODE](https://github.com/stevendelro/Weathernaut)
 
 Umbrellapp was so rewarding to create and finish. It, by far, was the most professional looking thing I've ever created. But, we need to go deeper.
 
@@ -137,18 +137,18 @@ And of course, a gif for you:
 
 This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
-- [NextJS](https://nextjs.org) — An opinionated create-react-app
-- [ReactJS](https://reactjs.org) — A Javascript library for building user interfaces.
-- [Material UI](https://material-ui.com) — A React component-based design system.
-- [Styled Components](https://styled-components.com/) — Visual primited for the component age.
-- [Recharts](https://recharts.org/en-US/) — A composable charting library built on React components.
-- [MapBox API](https://www.mapbox.com/) — Rich accurate map data. Used to turn location names into coordinates.
-- [Dark Sky API](https://darksky.net/) — A once open sourced database for weather information.
-- [react-map-gl](https://visgl.github.io/react-map-gl/) — WebGL-powered React suite for displaying maps.
-- [redux-thunk](https://github.com/reduxjs/redux-thunk) — middleware allows you to write action creators that return a function instead of an action.
-- [next-redux-wrapper](https://github.com/kirill-konshin/next-redux-wrapper) — A HOC that brings Next.js and Redux together
-- [redux-persist](https://github.com/rt2zz/redux-persist) — Persist and rehydrate a redux store after a browser refresh.
-- [Sirv](https://sirv.com/) — This was the image CDN hosting provider that I used to host the gifs for the readme.
+- [NextJS](https://nextjs.org) -- An opinionated create-react-app
+- [ReactJS](https://reactjs.org) -- A Javascript library for building user interfaces.
+- [Material UI](https://material-ui.com) -- A React component-based design system.
+- [Styled Components](https://styled-components.com/) -- Visual primited for the component age.
+- [Recharts](https://recharts.org/en-US/) -- A composable charting library built on React components.
+- [MapBox API](https://www.mapbox.com/) -- Rich accurate map data. Used to turn location names into coordinates.
+- [Dark Sky API](https://darksky.net/) -- A once open sourced database for weather information.
+- [react-map-gl](https://visgl.github.io/react-map-gl/) -- WebGL-powered React suite for displaying maps.
+- [redux-thunk](https://github.com/reduxjs/redux-thunk) -- middleware allows you to write action creators that return a function instead of an action.
+- [next-redux-wrapper](https://github.com/kirill-konshin/next-redux-wrapper) -- A HOC that brings Next.js and Redux together
+- [redux-persist](https://github.com/rt2zz/redux-persist) -- Persist and rehydrate a redux store after a browser refresh.
+- [Sirv](https://sirv.com/) -- This was the image CDN hosting provider that I used to host the gifs for the readme.
 
 ## Getting Started
 
@@ -233,11 +233,11 @@ Project Link: [https://github.com/stevendelro/Weathernaut](https://github.com/st
 
 > I wouldn't have been able to learn how to code without the courses and tutorials that more experienced developers have made. Talk down all you want about Udemy, but having someone tailor an experience as intimate as 20+ hour one-on-one session for just about ten bucks is just unbeatable.
 
-- [Andrew Mead's Udemy Courses](https://mead.io/) — Udemy
-- [Stephen Grider's Udemy Courses](https://rallycoding.com/) — Udemy
-- [Maximilian Schwarzmüller](https://www.udemy.com/user/maximilian-schwarzmuller/) — Udemy
-- [Reed Barger](https://www.udemy.com/user/reed-barger/) — Udemy
-- [Thomas Weibenfalk](https://www.udemy.com/user/thomas-928/) — Udemy
-- [Tyler McGinnis](https://ui.dev/courses/) — Personal Website
-- [Codevolution](https://www.youtube.com/c/Codevolution/) — Youtube
-- [Front-End Masters](https://frontendmasters.com/courses/) — Lecture format talks with industry leaders.
+- [Andrew Mead's Udemy Courses](https://mead.io/) -- Udemy
+- [Stephen Grider's Udemy Courses](https://rallycoding.com/) -- Udemy
+- [Maximilian Schwarzmüller](https://www.udemy.com/user/maximilian-schwarzmuller/) -- Udemy
+- [Reed Barger](https://www.udemy.com/user/reed-barger/) -- Udemy
+- [Thomas Weibenfalk](https://www.udemy.com/user/thomas-928/) -- Udemy
+- [Tyler McGinnis](https://ui.dev/courses/) -- Personal Website
+- [Codevolution](https://www.youtube.com/c/Codevolution/) -- Youtube
+- [Front-End Masters](https://frontendmasters.com/courses/) -- Lecture format talks with industry leaders.
