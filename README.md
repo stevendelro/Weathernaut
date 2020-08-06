@@ -1,9 +1,9 @@
 ## <center>Table of Contents</center>
 
 - [Project History](#project-history)
-  - [Iteration 1: redux-weather](#iteration-1:-redux-weather)
-  - [Iteration 2: Umbrellapp](#iteration-2:-Umbrellapp)
-  - [Iteration 3: Weathernaut](#iteration-3:-Weathernaut)
+  - [Iteration 1: redux-weather](#iteration-1-redux-weather)
+  - [Iteration 2: Umbrellapp](#iteration-2-Umbrellapp)
+  - [Iteration 3: Weathernaut](#iteration-3-Weathernaut)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
@@ -21,7 +21,7 @@ Weathernaut is the *third* iteration of a weather app that I made back in March 
 >**NOTE**
 >In this first section, I'll be discussing the two iterations before Weathernaut, so if you're looking for Weathernaut-specific information, use the table of contents above to get where ever you want to be.
 
-### Iteration 1: redux-weather
+### Iteration 1 redux-weather
 ###### [LIVE DEMO](https://redux-weather.now.sh/) • [SOURCE CODE](https://github.com/stevendelro/redux-weather)
 
 When the pandemic hit America, I decided to hit the keyboard. It had been a few months since I even attempted to code anything, so I was pretty rusty. The first order of business was to make an app that grabs data from an external API. So of course, a weather app fit the bill perfectly.
@@ -61,7 +61,7 @@ I even made a gif:
 ![](https://arbletur.sirv.com/demo.gif?gif.lossy=0)
 
 
-### Iteration 2: Umbrellapp
+### Iteration 2 Umbrellapp
 ###### [LIVE DEMO](https://umbrellapp.now.sh/) • [SOURCE CODE](https://github.com/stevendelro/react-weather-dashboard)
 
 Sweet. So I got all caught up with my old React skills. The next order of business was to wrap my head around React Hooks.
@@ -89,7 +89,7 @@ Little did I know how much I would be customizing and understanding the Material
 What resulted from that was, Umbrellapp:
 ![](https://arbletur.sirv.com/gifs/umbrellapp15fps.gif)
 
-### Iteration 3: [Weathernaut](https://github.com/stevendelro/Weathernaut)
+### Iteration 3 Weathernaut
 ###### [LIVE DEMO](https://weathernaut.now.sh/) • [SOURCE CODE](https://github.com/stevendelro/Weathernaut)
 
 Umbrellapp was so rewarding to create and finish. It, by far, was the most professional looking thing I've ever created. But, we need to go deeper.
@@ -120,6 +120,7 @@ So, after having been exposed to NextJS from a Udemy tutorial, I decided that I 
 NextJS makes you think about building React apps in such a different way. First of all, it has page based routing, which was new to me. Apparently, this was what made PHP so alluring and nice to work with. Also, there's no complicated setup and right out of the box you get cool features like automatic code spitting for each route.
 
 Some key points about the building of Weathernaut:
+
 * All source code has been completely refactored to be modular, easy to read, well commented, and very maintainable.
 * Dynamic page based routing with NextJS.
 * Replaced the large useReducer hook with by wapping the entire up with a Redux wrapper.
@@ -132,7 +133,7 @@ And of course, a gif for you:
 ![](https://arbletur.sirv.com/gifs/weathernaut.gif)
 
 
-## <center>Built With</center>
+## Built With
 
 This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
@@ -147,18 +148,19 @@ This section should list any major frameworks that you built your project using.
 - [redux-thunk](https://github.com/reduxjs/redux-thunk) — middleware allows you to write action creators that return a function instead of an action.
 - [next-redux-wrapper](https://github.com/kirill-konshin/next-redux-wrapper) — A HOC that brings Next.js and Redux together
 - [redux-persist](https://github.com/rt2zz/redux-persist) — Persist and rehydrate a redux store after a browser refresh.
+- [Sirv](https://sirv.com/) — This was the image CDN hosting provider that I used to host the gifs for the readme.
 
 ## Getting Started
 
 > **NOTE**
-> The Darksky API was just acquired by Apple, so unfortunately, they are no longer accepting API signups for new API keys.
-
-> March 31st, 2020 — *"Our API service for existing customers is not changing today, but we will no longer accept new signups. The API will continue to function through the end of 2021. As part of this transition, use of Dark Sky by Apple is subject to the Apple Privacy Policy, which can be found at apple.com/privacy."*
+> The Darksky API was just acquired by Apple, so unfortunately, they are no longer accepting API signups for new API keys. On March 31st, 2020: *"Our API service for existing customers is not changing today, but we will no longer accept new signups. The API will continue to function through the end of 2021. As part of this transition, use of Dark Sky by Apple is subject to the Apple Privacy Policy, which can be found at apple.com/privacy."*
 
 ### Prerequisites
 
 1. You'll need a MapBox API key. Sign up to get one [here](https://account.mapbox.com/auth/signin/).
-2. ~~You'll need a DarkSky API key~~ **(A future update will replace this API with weatherstack.com)**
+2. ~~You'll need a DarkSky API key~~ **No longer available.**
+
+*A future update will replace the Darksky API with weatherstack.com, stay tuned.)*
 
 ### Installation
 
@@ -172,12 +174,6 @@ git clone https://github.com/stevendelro/Weathernaut.git
 
 ```
 yarn
-
-```
-or
-```
-
-npm i
 ```
 
 3. Create a `.env.local` file in the project root directory (right next to your package.json) and add the following declarations:
@@ -190,24 +186,17 @@ DARKSKY_KEY=7601daeb3e11b6f49672afaebbb45cc1
 ```
 
 4. Build it:
-```
+
+```jsx
 yarn build
 ```
-or
-```
-npm run build
-```
+
 
 5. Fire it up:
 
-```
+```jsx
 yarn start
 ```
-or
-```
-npm run start
-```
-
 6. Head over to `localhost:3000` and see it in action.
 
 ## Usage
@@ -225,9 +214,9 @@ npm run start
 If you want to contribute to this project, I'm all for it!
 
 1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
+2. Create your Feature Branch `git checkout -b feature/AmazingFeature`
+3. Commit your Changes `git commit -m 'Add some AmazingFeature'`
+4. Push to the Branch `git push origin feature/AmazingFeature`
 5. Open a Pull Request
 
 ## License
@@ -248,20 +237,7 @@ Project Link: [https://github.com/stevendelro/Weathernaut](https://github.com/st
 - [Stephen Grider's Udemy Courses](https://rallycoding.com/) — Udemy
 - [Maximilian Schwarzmüller](https://www.udemy.com/user/maximilian-schwarzmuller/) — Udemy
 - [Reed Barger](https://www.udemy.com/user/reed-barger/) — Udemy
-- [Thomas Weibenfalk](https://www.udemy.com/user/thomas-928/) - Udemy
+- [Thomas Weibenfalk](https://www.udemy.com/user/thomas-928/) — Udemy
 - [Tyler McGinnis](https://ui.dev/courses/) — Personal Website
-- [Codevolution](https://www.youtube.com/c/Codevolution/) - Youtube
+- [Codevolution](https://www.youtube.com/c/Codevolution/) — Youtube
 - [Front-End Masters](https://frontendmasters.com/courses/) — Lecture format talks with industry leaders.
-
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: public/weathernaut.png
-[redux-weather-github]:
-[redux-weather-demo]:
-[3]: -->
