@@ -58,6 +58,7 @@ I've made apps in the past with redux once before, so this time it wasn't too di
 It had been a long time since I made anything, so I was pretty stoked.
 
 I even made a gif:
+
 ![](https://arbletur.sirv.com/demo.gif?gif.lossy=0)
 
 
@@ -87,6 +88,7 @@ For a little extra kick, I decided to implement the browser's Geolocation API in
 Little did I know how much I would be customizing and understanding the Material-UI ecosystem. Seeing how they implement their own components really made an impact on how I approached writting my code.
 
 What resulted from that was, Umbrellapp:
+
 ![](https://arbletur.sirv.com/gifs/umbrellapp15fps.gif)
 
 ### Iteration 3 Weathernaut
@@ -130,6 +132,7 @@ Some key points about the building of Weathernaut:
 * Many small improvements with the UI/UX.
 
 And of course, a gif for you:
+
 ![](https://arbletur.sirv.com/gifs/weathernaut.gif)
 
 
