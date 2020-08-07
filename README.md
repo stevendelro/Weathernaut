@@ -59,7 +59,7 @@ It had been a long time since I made anything, so I was pretty stoked.
 
 I even made a gif:
 
-![](https://arbletur.sirv.com/demo.gif?gif.lossy=0)
+![](https://arbletur.sirv.com/demo.gif)
 
 
 ### Iteration 2 Umbrellapp
