@@ -59,7 +59,7 @@ It had been a long time since I made anything, so I was pretty stoked.
 
 I even made a gif:
 
-![](https://arbletur.sirv.com/demo.gif)
+![](https://github.com/stevendelro/redux-weather/blob/master/demo.gif?raw=true)
 
 
 ### Iteration 2 Umbrellapp
