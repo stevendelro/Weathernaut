@@ -12,7 +12,7 @@
     "@material-ui/lab": "^4.0.0-alpha.55",
     "axios": "^0.21.2",
     "clsx": "latest",
-    "moment": "^2.26.0",
+    "moment": "^2.29.2",
     "next": "12.1.0",
     "next-redux-wrapper": "^6.0.0",
     "react": "^16.13.1",
